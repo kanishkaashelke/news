@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: The Honeymoon Murder Conspiracy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+            width: 100%;
+            max-width: 600px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flowchart-item {
+            border-color: #0582CA;
+            background-color: #F0F8FF;
+        }
+        .flowchart-arrow {
+            color: #00A6FB;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<!--
+    Infographic Narrative & Structure Plan:
+    1.  Header: A compelling title and a hook with key statistics.
+    2.  Section 1: The Timeline - A step-by-step vertical timeline of the case from marriage to court date.
+    3.  Section 2: The Conspiracy Network - Introducing the accused with a table and a comparative age chart.
+    4.  Section 3: Anatomy of the Plot - A flowchart detailing the murder conspiracy from planning to execution.
+    5.  Section 4: "Operation Honeymoon" - A donut chart visualizing the different types of evidence that cracked the case.
+    6.  Section 5: Conflicting Narratives - A side-by-side comparison of the police investigation's findings versus the defense claims.
+    7.  Footer: A concluding statement on the case's current status and next steps.
+-->
+<!--
+    Visualization Selection Plan:
+    1.  Key Stats (Hook): Goal: Inform. Visualization: Single Big Number (Styled Text). Justification: High impact, grabs attention immediately. Method: HTML/CSS. (NO SVG).
+    2.  Timeline of Events: Goal: Change. Visualization: Timeline. Justification: Clearly shows the sequence of discrete events over time. Method: HTML/CSS with Tailwind. (NO SVG).
+    3.  Accused Details: Goal: Organize. Visualization: Table. Justification: Best for presenting structured data with multiple attributes per item. Method: HTML `<table>` with Tailwind. (NO SVG).
+    4.  Comparison of Accused Ages: Goal: Compare. Visualization: Bar Chart. Justification: Simple, effective comparison of a single metric across categories. Method: Chart.js (Canvas). (NO SVG).
+    5.  Conspiracy Flowchart: Goal: Organize. Visualization: Flow Chart. Justification: Ideal for showing a multi-step process. Method: HTML/CSS with Tailwind. (NO SVG, NO MERMAID JS).
+    6.  Investigative Evidence Breakdown: Goal: Compare (Composition). Visualization: Donut Chart. Justification: Shows parts of a whole in a visually engaging way. Method: Chart.js (Canvas). (NO SVG).
+    7.  Conflicting Narratives: Goal: Compare. Visualization: Two-column layout. Justification: Direct side-by-side comparison highlights the core conflict in the case. Method: HTML/CSS with Tailwind. (NO SVG).
+-->
+<!-- Color Palette Chosen: "Energetic & Playful" (#00A6FB, #0582CA, #006494, #F99F00, #DB3A34) -->
+<!-- Confirmation: NEITHER Mermaid JS NOR SVG graphics were used in this document. All visuals are pure HTML/CSS or rendered on HTML Canvas via Chart.js. -->
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#006494] mb-2">The Honeymoon Murder</h1>
+            <p class="text-lg md:text-xl text-gray-600">Anatomy of a Conspiracy: Visualizing the Case of Raja Raghuvanshi</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center mb-12">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-5xl font-bold text-[#00A6FB]">5</p>
+                <p class="text-lg text-gray-700 mt-2">Key Accused Apprehended</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-5xl font-bold text-[#F99F00]">21</p>
+                <p class="text-lg text-gray-700 mt-2">Days from Murder to Arrests</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <p class="text-5xl font-bold text-[#DB3A34]">₹20 Lakh</p>
+                <p class="text-lg text-gray-700 mt-2">Alleged Contract Killing Fee</p>
+            </div>
+        </div>
+
+        <section id="timeline" class="mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#006494]">Timeline of a Tragedy</h2>
+                <div class="relative wrap overflow-hidden p-4 h-full">
+                    <div class="border-2-2 absolute border-opacity-20 border-gray-700 h-full border" style="left: 50%"></div>
+                    
+                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-[#00A6FB] shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">1</h1>
+                        </div>
+                        <div class="order-1 bg-[#00A6FB] bg-opacity-20 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <p class="text-sm font-medium text-[#006494]">May 11-20, 2025</p>
+                            <h3 class="mb-3 font-bold text-gray-800 text-xl">Marriage & Honeymoon</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Raja and Sonam Raghuvanshi marry and depart for their honeymoon in Meghalaya.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-[#F99F00] shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto text-white font-semibold text-lg">2</h1>
+                        </div>
+                        <div class="order-1 bg-[#F99F00] bg-opacity-20 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <p class="text-sm font-medium text-[#c87f00]">May 23-24, 2025</p>
+                            <h3 class="mb-3 font-bold text-gray-800 text-xl">The Disappearance</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">The couple is reported missing. Their rented scooter is found abandoned near Sohrarim.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-[#DB3A34] shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">3</h1>
+                        </div>
+                        <div class="order-1 bg-[#DB3A34] bg-opacity-20 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                           <p class="text-sm font-medium text-[#b02e29]">June 2, 2025</p>
+                            <h3 class="mb-3 font-bold text-gray-800 text-xl">Grim Discovery</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Raja's body is discovered in a gorge below Wei Sawdong Falls, confirming murder.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-[#0582CA] shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto text-white font-semibold text-lg">4</h1>
+                        </div>
+                        <div class="order-1 bg-[#0582CA] bg-opacity-20 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <p class="text-sm font-medium text-[#006494]">June 7-10, 2025</p>
+                            <h3 class="mb-3 font-bold text-gray-800 text-xl">Operation Honeymoon</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">Police launch a major investigation. Sonam surrenders in UP, and all four co-accused are arrested across MP and UP.</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-8 flex justify-between items-center w-full right-timeline">
+                        <div class="order-1 w-5/12"></div>
+                        <div class="z-20 flex items-center order-1 bg-[#006494] shadow-xl w-8 h-8 rounded-full">
+                            <h1 class="mx-auto font-semibold text-lg text-white">5</h1>
+                        </div>
+                        <div class="order-1 bg-[#006494] bg-opacity-20 rounded-lg shadow-xl w-5/12 px-6 py-4">
+                            <p class="text-sm font-medium text-[#004c70]">June 11, 2025</p>
+                            <h3 class="mb-3 font-bold text-gray-800 text-xl">The Court Date</h3>
+                            <p class="text-sm leading-snug tracking-wide text-gray-900 text-opacity-100">All five accused are produced in Shillong court, marking the start of the prosecution phase.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="players" class="mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-2 text-[#006494]">The Conspiracy Network</h2>
+                <p class="text-center text-gray-600 mb-8">A look at the key individuals accused in the murder plot.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="overflow-x-auto">
+                        <p class="font-semibold text-lg mb-4 text-gray-700">Key Accused and Their Alleged Roles</p>
+                        <table class="w-full text-sm text-left text-gray-500">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Name</th>
+                                    <th scope="col" class="px-6 py-3">Age</th>
+                                    <th scope="col" class="px-6 py-3">Alleged Role</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Sonam Raghuvanshi</th>
+                                    <td class="px-6 py-4">24</td>
+                                    <td class="px-6 py-4">Prime Orchestrator</td>
+                                </tr>
+                                <tr class="bg-gray-50 border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Raj Kushwaha</th>
+                                    <td class="px-6 py-4">21</td>
+                                    <td class="px-6 py-4">Co-conspirator / Funder</td>
+                                </tr>
+                                <tr class="bg-white border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Vishal Singh Chauhan</th>
+                                    <td class="px-6 py-4">22</td>
+                                    <td class="px-6 py-4">Hired Killer</td>
+                                </tr>
+                                <tr class="bg-gray-50 border-b">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Akash Rajput</th>
+                                    <td class="px-6 py-4">19</td>
+                                    <td class="px-6 py-4">Hired Killer</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">Anand Kurmi</th>
+                                    <td class="px-6 py-4">23</td>
+                                    <td class="px-6 py-4">Hired Killer</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <p class="font-semibold text-lg mb-4 text-gray-700">Comparison of Accused Ages</p>
+                        <div class="chart-container">
+                            <canvas id="accusedAgesChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2 text-center">The accused are all in their late teens or early twenties, with the youngest being 19 and the oldest 24.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flowchart" class="mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                 <h2 class="text-3xl font-bold text-center mb-2 text-[#006494]">Anatomy of the Plot</h2>
+                 <p class="text-center text-gray-600 mb-8">Deconstructing the alleged multi-step conspiracy to murder Raja Raghuvanshi.</p>
+                <div class="flex flex-col items-center space-y-4">
+                    <div class="p-4 border-2 rounded-lg text-center flowchart-item w-full md:w-3/4">
+                        <span class="font-bold text-lg text-[#006494]">Step 1: The Conspiracy</span>
+                        <p>Sonam and her alleged lover, Raj Kushwaha, conspire to "eliminate" her husband, Raja, before the wedding.</p>
+                    </div>
+                    <div class="text-4xl font-light flowchart-arrow">↓</div>
+                    <div class="p-4 border-2 rounded-lg text-center flowchart-item w-full md:w-3/4">
+                        <span class="font-bold text-lg text-[#006494]">Step 2: The Contract</span>
+                        <p>Raj Kushwaha allegedly hires three friends—Vishal, Akash, and Anand—to carry out the murder for a fee ranging from ₹4 lakh to ₹20 lakh.</p>
+                    </div>
+                    <div class="text-4xl font-light flowchart-arrow">↓</div>
+                     <div class="p-4 border-2 rounded-lg text-center flowchart-item w-full md:w-3/4">
+                        <span class="font-bold text-lg text-[#006494]">Step 3: The Execution</span>
+                        <p>During the honeymoon, Sonam allegedly leads Raja to a secluded spot at Wei Sawdong Falls, where the hired killers attack and murder him. She is reported to have assisted and pushed the body into a gorge.</p>
+                    </div>
+                    <div class="text-4xl font-light flowchart-arrow">↓</div>
+                    <div class="p-4 border-2 rounded-lg text-center flowchart-item w-full md:w-3/4">
+                        <span class="font-bold text-lg text-[#006494]">Step 4: The Cover-Up & Escape</span>
+                        <p>Sonam stages a robbery, flees to Indore to meet Raj, and then goes into hiding in Uttar Pradesh before surrendering.</p>
+                    </div>
+                     <div class="text-4xl font-light flowchart-arrow">↓</div>
+                     <div class="p-4 border-2 rounded-lg text-center flowchart-item w-full md:w-3/4">
+                        <span class="font-bold text-lg text-[#006494]">Step 5: The Apprehension</span>
+                        <p>Through "Operation Honeymoon," police use technical surveillance, witness testimony, and inter-state coordination to arrest all five individuals involved.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="investigation" class="mb-12">
+             <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                 <h2 class="text-3xl font-bold text-center mb-2 text-[#006494]">Cracking "Operation Honeymoon"</h2>
+                 <p class="text-center text-gray-600 mb-8">The investigation was solved through a synergistic combination of traditional and modern policing techniques.</p>
+                <div class="chart-container h-96">
+                    <canvas id="evidenceChart"></canvas>
+                </div>
+                <p class="text-center text-gray-600 mt-4 px-4">The case was built on a foundation of digital evidence, crucial witness testimony, physical clues from the crime scene, and effective police cooperation across state lines.</p>
+            </div>
+        </section>
+
+        <section id="narratives" class="mb-12">
+            <div class="bg-white rounded-lg shadow-md p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center mb-8 text-[#006494]">A Tale of Two Narratives</h2>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 p-6 rounded-lg border-l-4 border-[#00A6FB]">
+                        <h3 class="text-2xl font-bold text-[#006494] mb-4">Police & Prosecution's Case</h3>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>A pre-meditated murder conspiracy orchestrated by Sonam and her lover, Raj Kushwaha.</li>
+                            <li>The motive was to eliminate Raja to allow Sonam and Raj to be together.</li>
+                            <li>Three men were hired as contract killers.</li>
+                            <li>Sonam was present at the crime scene and actively participated in the murder and disposal of the body.</li>
+                            <li>Substantial evidence including phone chats, CCTV footage, and confessions support the theory.</li>
+                        </ul>
+                    </div>
+                     <div class="bg-red-50 p-6 rounded-lg border-l-4 border-[#DB3A34]">
+                        <h3 class="text-2xl font-bold text-[#b02e29] mb-4">Accused Families' Defense</h3>
+                         <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Sonam is "100% innocent," was abducted, and is being framed by the police.</li>
+                            <li>Raj Kushwaha was "framed" and had a purely professional relationship with Sonam.</li>
+                             <li>The Meghalaya Police are "misleading the media."</li>
+                            <li>The families have vocally demanded a Central Bureau of Investigation (CBI) probe.</li>
+                             <li>They claim the police narrative is false and their children are innocent.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="text-center mt-12 pt-8 border-t border-gray-300">
+            <h3 class="text-2xl font-bold text-[#006494]">What's Next?</h3>
+            <p class="text-gray-600 mt-2 max-w-3xl mx-auto">With all accused produced in court, the case enters a critical prosecutorial phase. The police will seek custody for further interrogation and crime scene reconstruction to build a "watertight" chargesheet. The world watches as the legal system prepares to deliver justice in this tragic and complex case of love, betrayal, and murder.</p>
+        </footer>
+
+    </div>
+
+<script>
+    function wrapText(str, maxWidth) {
+        if (str.length <= maxWidth) {
+            return str;
+        }
+        const words = str.split(' ');
+        let lines = [];
+        let currentLine = words[0];
+
+        for (let i = 1; i < words.length; i++) {
+            if ((currentLine + ' ' + words[i]).length > maxWidth) {
+                lines.push(currentLine);
+                currentLine = words[i];
+            } else {
+                currentLine += ' ' + words[i];
+            }
+        }
+        lines.push(currentLine);
+        return lines;
+    }
+
+    const tooltipTitleCallback = function(tooltipItems) {
+        const item = tooltipItems[0];
+        let label = item.chart.data.labels[item.dataIndex];
+        if (Array.isArray(label)) {
+          return label.join(' ');
+        }
+        return label;
+    };
+
+    const sharedChartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#374151',
+                    font: {
+                        family: "'Inter', sans-serif",
+                    }
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    title: tooltipTitleCallback
+                },
+                titleFont: { family: "'Inter', sans-serif" },
+                bodyFont: { family: "'Inter', sans-serif" }
+            }
+        },
+        scales: {
+            y: {
+                ticks: {
+                    color: '#4B5563',
+                    font: { family: "'Inter', sans-serif" }
+                },
+                grid: {
+                    color: '#E5E7EB'
+                }
+            },
+            x: {
+                ticks: {
+                    color: '#4B5563',
+                    font: { family: "'Inter', sans-serif" }
+                },
+                grid: {
+                    display: false
+                }
+            }
+        }
+    };
+
+
+    const accusedAgesCtx = document.getElementById('accusedAgesChart').getContext('2d');
+    new Chart(accusedAgesCtx, {
+        type: 'bar',
+        data: {
+            labels: ['Akash Rajput', 'Raj Kushwaha', 'Vishal S. Chauhan', 'Anand Kurmi', 'Sonam Raghuvanshi'],
+            datasets: [{
+                label: 'Age',
+                data: [19, 21, 22, 23, 24],
+                backgroundColor: ['#00A6FB', '#0582CA', '#006494', '#F99F00', '#DB3A34'],
+                borderColor: ['#00A6FB', '#0582CA', '#006494', '#F99F00', '#DB3A34'],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            ...sharedChartOptions,
+            indexAxis: 'y', 
+            plugins: {
+                ...sharedChartOptions.plugins,
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    const evidenceCtx = document.getElementById('evidenceChart').getContext('2d');
+    const originalLabels = [
+        'Digital Evidence (CCTV, Phones)',
+        'Witness Testimony (Tourist Guide)',
+        'Physical Evidence (Weapon, Clothes)',
+        'Inter-State Police Coordination'
+    ];
+
+    const wrappedLabels = originalLabels.map(label => wrapText(label, 16));
+
+    new Chart(evidenceCtx, {
+        type: 'doughnut',
+        data: {
+            labels: wrappedLabels,
+            datasets: [{
+                label: 'Contribution to Investigation',
+                data: [35, 25, 20, 20],
+                backgroundColor: [
+                    '#00A6FB',
+                    '#F99F00',
+                    '#DB3A34',
+                    '#0582CA'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            ...sharedChartOptions,
+            scales: {
+                 y: { display: false },
+                 x: { display: false }
+            },
+            plugins: {
+                ...sharedChartOptions.plugins,
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: '#374151',
+                        font: { family: "'Inter', sans-serif" },
+                        boxWidth: 20
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
