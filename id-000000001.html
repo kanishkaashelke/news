@@ -1,491 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MV Wan Hai 503 Incident: An Interactive Report</title>
+    <title>Infographic: The MV Wan Hai 503 Disaster</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Slate Gray and Muted Tones -->
-    <!-- Application Structure Plan: A non-linear, thematic dashboard SPA. The structure includes a top navigation bar for quick access to key sections: Overview, Crew Status, Response, Cargo Risk, and Environmental Impact. The 'Overview' section acts as a central hub with key stats and an interactive timeline. Subsequent sections use a mix of data cards, charts (Chart.js), and process diagrams (HTML/CSS) to break down complex information into digestible, interactive components. This structure was chosen over a linear report format to empower users to explore the multifaceted incident based on their interests, promoting better synthesis and understanding of the event's scale, human impact, and ecological threat. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: This infographic uses a top-down narrative structure to guide the user through the complex details of the MV Wan Hai 503 incident. It begins with a high-impact "Hook" section using large, bold statistics to immediately convey the scale of the disaster. The story then unfolds chronologically and thematically through distinct sections: a detailed timeline of the incident, the human cost (crew status), the coordinated multi-agency response, the specific chemical dangers (hazardous cargo), and the resulting environmental fallout. This narrative flow was chosen to break down the dense report into a digestible and compelling story, moving from the immediate event to its broader consequences for easier user comprehension. -->
     <!-- Visualization & Content Choices: 
-        - Report Info: Crew statistics (total, rescued, missing, injured). Goal: Inform. Viz/Method: Key metric cards (HTML/CSS) and a Donut Chart (Chart.js). Interaction: Hover tooltips on the chart. Justification: Provides an immediate, quantifiable summary of the human toll.
-        - Report Info: Incident timeline. Goal: Show Change/Sequence. Viz/Method: Interactive vertical timeline (HTML/CSS). Interaction: Clicking a timeline event reveals detailed information. Justification: Allows users to step through the event chronologically, understanding the rapid escalation.
-        - Report Info: Hazardous cargo categories and specific chemicals. Goal: Organize & Compare. Viz/Method: Bar Chart (Chart.js) for categories and a filterable list (HTML/JS) for specific chemicals. Interaction: Buttons filter the chemical list by risk type. Justification: Breaks down the complex environmental threat into understandable categories and allows for targeted exploration of the specific dangers.
-        - Report Info: Response operations assets. Goal: Organize. Viz/Method: Process-style flow diagram (HTML/CSS). Interaction: None. Justification: Clearly visualizes the multi-agency coordination and deployment of assets.
-        - Report Info: Comparison to MSC ELSA 3. Goal: Compare. Viz/Method: Side-by-side text cards. Interaction: None. Justification: Provides crucial context by highlighting the recurrence of such incidents.
+        - Data Point: Key incident statistics (crew numbers, lost containers). Goal: Inform. Viz: Large typographic numbers. Justification: Provides immediate, high-impact understanding of the disaster's scale. Method: HTML/Tailwind.
+        - Data Point: Crew status breakdown (rescued, missing, injured). Goal: Compare/Inform. Viz: Donut Chart. Justification: A donut chart is excellent for showing part-to-whole relationships and is more visually engaging than a simple list for this critical data. Library: Chart.js/Canvas.
+        - Data Point: Sequence of events. Goal: Change. Viz: Vertical Timeline. Justification: Clearly illustrates the chronological progression of the disaster in an easy-to-follow, scrollable format. Method: Structured HTML/CSS with Tailwind.
+        - Data Point: Multi-agency response. Goal: Organize. Viz: Flowchart-style diagram. Justification: Best way to show the relationship and assets of different responding agencies in a clear, process-oriented manner. Method: HTML/CSS with Tailwind (NO SVG/Mermaid).
+        - Data Point: Hazardous cargo categories. Goal: Compare. Viz: Horizontal Bar Chart. Justification: Effectively compares the volume of different hazardous material categories, making the data easy to scan and compare. Library: Chart.js/Canvas.
+        - Data Point: Specific hazardous chemicals. Goal: Organize. Viz: Styled Table. Justification: A table is the clearest and most organized way to present detailed, multi-column data about specific chemicals and their risks. Method: HTML/Tailwind.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-        }
-        .nav-link {
-            transition: color 0.3s, border-bottom-color 0.3s;
-        }
-        .nav-link.active, .nav-link:hover {
-            color: #0f172a; /* slate-900 */
-            border-bottom-color: #3b82f6; /* blue-500 */
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 300px;
-            max-height: 350px;
-        }
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 350px;
-                max-height: 400px;
-            }
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            left: -0.5rem;
-            top: 0.25rem;
-            background-color: #cbd5e1; /* slate-300 */
-            border: 3px solid #f8fafc; /* slate-50 */
-        }
-        .timeline-item.active::before {
-            background-color: #3b82f6; /* blue-500 */
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f0f9ff; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (max-width: 768px) { .chart-container { height: 300px; max-height: 350px; } }
+        .stat-card { background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-700">
+<body class="text-slate-800">
 
-    <header class="bg-slate-800 text-white shadow-md p-4 sticky top-0 z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-bold">MV Wan Hai 503 Incident</h1>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#overview" class="nav-link border-b-2 border-transparent pb-1">Overview</a>
-                <a href="#crew" class="nav-link border-b-2 border-transparent pb-1">Crew Status</a>
-                <a href="#response" class="nav-link border-b-2 border-transparent pb-1">Response Ops</a>
-                <a href="#cargo" class="nav-link border-b-2 border-transparent pb-1">Cargo Risk</a>
-                <a href="#environment" class="nav-link border-b-2 border-transparent pb-1">Environmental Impact</a>
-            </nav>
-            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
-                <span class="text-2xl">☰</span>
-            </button>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden mt-4">
-            <a href="#overview" class="block py-2 px-4 text-sm hover:bg-slate-700 rounded">Overview</a>
-            <a href="#crew" class="block py-2 px-4 text-sm hover:bg-slate-700 rounded">Crew Status</a>
-            <a href="#response" class="block py-2 px-4 text-sm hover:bg-slate-700 rounded">Response Ops</a>
-            <a href="#cargo" class="block py-2 px-4 text-sm hover:bg-slate-700 rounded">Cargo Risk</a>
-            <a href="#environment" class="block py-2 px-4 text-sm hover:bg-slate-700 rounded">Environmental Impact</a>
-        </div>
-    </header>
+    <div class="min-h-screen bg-sky-50">
 
-    <main class="container mx-auto p-4 md:p-8">
+        <header class="text-center p-8 md:p-12 bg-sky-800 text-white">
+            <h1 class="text-4xl md:text-5xl font-black mb-2">MARITIME DISASTER: MV WAN HAI 503</h1>
+            <p class="text-lg md:text-xl text-sky-200 max-w-4xl mx-auto">A comprehensive overview of the explosion, the multi-agency response, and the looming environmental threat off the coast of Kerala, India on June 9, 2025.</p>
+        </header>
 
-        <section id="overview" class="mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">Incident at a Glance</h2>
-            <p class="mb-8 max-w-4xl text-lg">
-                On June 9, 2025, the Singapore-flagged container ship MV Wan Hai 503 suffered a catastrophic internal explosion, leading to a major fire off the coast of Kerala, India. This interactive report breaks down the timeline of the event, the extensive rescue and firefighting response, the hazardous materials involved, and the significant environmental threat posed by this maritime disaster.
-            </p>
+        <main class="p-4 md:p-8">
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center">
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <p class="text-3xl font-bold text-slate-800">22</p>
-                    <p class="text-sm text-slate-500">Total Crew</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <p class="text-3xl font-bold text-green-600">18</p>
-                    <p class="text-sm text-slate-500">Rescued</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <p class="text-3xl font-bold text-yellow-600">~6</p>
-                    <p class="text-sm text-slate-500">Injured</p>
-                </div>
-                <div class="bg-white p-4 rounded-lg shadow">
-                    <p class="text-3xl font-bold text-red-600">4</p>
-                    <p class="text-sm text-slate-500">Missing</p>
-                </div>
-            </div>
-
-            <div class="lg:flex gap-8">
-                <div class="lg:w-1/3 mb-8 lg:mb-0">
-                    <h3 class="text-xl font-semibold text-slate-800 mb-4">Incident Timeline</h3>
-                    <div id="timeline-controls" class="relative pl-4 border-l-2 border-slate-200">
+            <section id="overview" class="mb-16">
+                <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
+                    <div class="stat-card p-6 rounded-lg shadow-lg">
+                        <p class="text-5xl md:text-6xl font-black text-sky-700">22</p>
+                        <h3 class="font-bold mt-2 text-slate-600">Total Crew Aboard</h3>
+                    </div>
+                    <div class="stat-card p-6 rounded-lg shadow-lg">
+                        <p class="text-5xl md:text-6xl font-black text-green-600">18</p>
+                        <h3 class="font-bold mt-2 text-slate-600">Crew Rescued</h3>
+                    </div>
+                    <div class="stat-card p-6 rounded-lg shadow-lg">
+                        <p class="text-5xl md:text-6xl font-black text-red-600">4</p>
+                        <h3 class="font-bold mt-2 text-slate-600">Crew Missing</h3>
+                    </div>
+                    <div class="stat-card p-6 rounded-lg shadow-lg">
+                        <p class="text-5xl md:text-6xl font-black text-amber-600">~50</p>
+                        <h3 class="font-bold mt-2 text-slate-600">Containers Lost at Sea</h3>
                     </div>
                 </div>
-                <div class="lg:w-2/3 bg-white p-6 rounded-lg shadow-lg">
-                    <div id="timeline-details" class="fade-in">
+            </section>
+            
+            <section id="timeline" class="max-w-5xl mx-auto mb-16">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-center mb-8">Disaster Timeline</h2>
+                    <div class="relative pl-8 border-l-4 border-sky-200">
+                        <div class="mb-12 relative">
+                            <div class="absolute w-6 h-6 bg-sky-600 rounded-full -left-11 border-4 border-white"></div>
+                            <p class="font-bold text-sky-800">June 7, 2025</p>
+                            <h3 class="text-xl font-semibold mb-1">Departure</h3>
+                            <p class="text-slate-600">MV Wan Hai 503 departs from Colombo, Sri Lanka, en route to Mumbai, India.</p>
+                        </div>
+                        <div class="mb-12 relative">
+                            <div class="absolute w-6 h-6 bg-sky-600 rounded-full -left-11 border-4 border-white"></div>
+                            <p class="font-bold text-sky-800">June 9, 09:30 AM</p>
+                            <h3 class="text-xl font-semibold mb-1">Distress Alert</h3>
+                            <p class="text-slate-600">Indian Navy's IFC-IOR receives a distress alert reporting an internal container explosion and fire onboard the vessel.</p>
+                        </div>
+                        <div class="mb-12 relative">
+                            <div class="absolute w-6 h-6 bg-sky-600 rounded-full -left-11 border-4 border-white"></div>
+                            <p class="font-bold text-sky-800">June 9, ~12:30 PM</p>
+                            <h3 class="text-xl font-semibold mb-1">Catastrophe Strikes</h3>
+                            <p class="text-slate-600">A severe internal explosion occurs, leading to a major fire. Within hours, 18 of the 22 crew members abandon the rapidly deteriorating vessel.</p>
+                        </div>
+                        <div class="mb-12 relative">
+                            <div class="absolute w-6 h-6 bg-sky-600 rounded-full -left-11 border-4 border-white"></div>
+                            <p class="font-bold text-sky-800">June 9, 16:30 PM</p>
+                            <h3 class="text-xl font-semibold mb-1">Rescue Operation</h3>
+                            <p class="text-slate-600">The Indian Navy ship INS Surat successfully evacuates the 18 crew members from lifeboats, demonstrating a swift and effective response.</p>
+                        </div>
+                         <div class="relative">
+                            <div class="absolute w-6 h-6 bg-sky-600 rounded-full -left-11 border-4 border-white"></div>
+                            <p class="font-bold text-sky-800">June 10, Ongoing</p>
+                            <h3 class="text-xl font-semibold mb-1">Persistent Emergency</h3>
+                            <p class="text-slate-600">The vessel remains adrift, listing 10-15 degrees and burning. Firefighting efforts continue amidst ongoing explosions, as the search for 4 missing crew members is underway.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="crew" class="mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">The Human Element: Crew Status</h2>
-            <p class="mb-8 max-w-4xl text-lg">
-                The immediate human cost of the disaster was significant. This section details the status of the 22 crew members aboard the MV Wan Hai 503, highlighting the successful rescue of the majority and the ongoing search for those still missing. Interact with the chart to see a breakdown of the crew's status.
-            </p>
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div class="bg-white p-6 rounded-lg shadow">
+            </section>
+            
+            <section id="human-cost" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 items-center">
+                <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-center mb-4">The Human Cost</h2>
+                    <p class="text-center text-slate-600 mb-6">Of the 22 crew members aboard, the swift SAR operation led by the Indian Navy and Coast Guard was critical. However, the incident resulted in injuries and a search for those still missing.</p>
                     <div class="chart-container">
                         <canvas id="crewStatusChart"></canvas>
                     </div>
                 </div>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <h4 class="font-bold text-green-700">18 Rescued</h4>
-                        <p class="text-sm">Evacuated by the Indian Navy and Coast Guard. They were transferred to INS Surat and taken to New Mangalore Port. First aid was administered onboard for the injured.</p>
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-green-700">18 Rescued Crew</h3>
+                        <p class="text-slate-600 mt-2">Evacuated by INS Surat and transported to New Mangalore Port. The successful rescue under volatile conditions highlights the effectiveness of the coordinated response.</p>
                     </div>
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <h4 class="font-bold text-yellow-700">5-6 Injured</h4>
-                        <p class="text-sm">Two individuals suffered severe burns (30-40%) and remain in critical condition. Three others with less severe injuries have been discharged from the hospital.</p>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow">
-                        <h4 class="font-bold text-red-700">4 Missing</h4>
-                        <p class="text-sm">An ongoing search and rescue operation continues for four crew members: two from Taiwan, one from Indonesia, and one from Myanmar.</p>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold text-amber-700">5-6 Injured</h3>
+                        <p class="text-slate-600 mt-2">Two individuals remain in critical condition with severe burns (30-40%) and respiratory injuries. Three others with less severe injuries have been discharged.</p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            
+            <section id="response-flow" class="max-w-7xl mx-auto mb-16">
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-center mb-2">Coordinated Emergency Response</h2>
+                    <p class="text-center text-slate-600 mb-8 max-w-3xl mx-auto">The emergency triggered a massive, multi-agency response, demonstrating strong international and domestic cooperation to save lives and contain the disaster.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="p-4 rounded-lg bg-sky-100 border border-sky-300">
+                            <h3 class="text-2xl font-bold text-sky-800 mb-3">Indian Navy</h3>
+                            <p class="font-semibold">➡️ INS Surat</p><p class="text-sm text-slate-500 mb-2">(SAR & Evacuation)</p>
+                            <p class="font-semibold">➡️ Dornier Aircraft</p><p class="text-sm text-slate-500">(Aerial Surveillance)</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-teal-100 border border-teal-300">
+                            <h3 class="text-2xl font-bold text-teal-800 mb-3">Indian Coast Guard</h3>
+                            <p class="font-semibold">➡️ ICGS Samarth, Samudra Prahari</p><p class="text-sm text-slate-500 mb-2">(Firefighting)</p>
+                            <p class="font-semibold">➡️ ICGS Sachet</p><p class="text-sm text-slate-500">(Support)</p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-indigo-100 border border-indigo-300">
+                            <h3 class="text-2xl font-bold text-indigo-800 mb-3">International & Civilian</h3>
+                             <p class="font-semibold">➡️ Singapore MPA</p><p class="text-sm text-slate-500 mb-2">(Technical Coordination)</p>
+                            <p class="font-semibold">➡️ SMIT Salvage</p><p class="text-sm text-slate-500">(Salvage Experts)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-        <section id="response" class="mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">A Coordinated Response</h2>
-            <p class="mb-8 max-w-4xl text-lg">
-                The emergency triggered a massive, multi-agency response led by the Indian Navy and Coast Guard, in close coordination with Singaporean authorities. The operation focused on saving lives, fighting the persistent fire, and mitigating environmental damage. The flow below illustrates the key assets deployed.
-            </p>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="grid md:grid-cols-3 gap-6 text-center">
-                    <div>
-                        <h4 class="font-semibold text-lg text-blue-800 mb-2">Indian Navy</h4>
-                        <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                            <p class="font-bold">INS Surat</p><p class="text-sm mb-2">(Rescue & Evacuation)</p>
-                            <p class="font-bold">Dornier Aircraft</p><p class="text-sm">(Aerial Surveillance)</p>
+            <section id="cargo" class="max-w-7xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-center mb-8">A Chemical Time Bomb: The Hazardous Cargo</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <div class="lg:col-span-2 bg-white p-6 md:p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-4">Hazardous Containers Breakdown</h3>
+                        <p class="text-slate-600 mb-6">The vessel carried over 140 containers with dangerous goods, posing a complex chemical threat. The chart below shows the estimated breakdown by primary risk category.</p>
+                        <div class="chart-container">
+                            <canvas id="cargoChart"></canvas>
                         </div>
                     </div>
-                    <div>
-                        <h4 class="font-semibold text-lg text-teal-800 mb-2">Indian Coast Guard</h4>
-                        <div class="bg-teal-50 p-4 rounded-lg border border-teal-200">
-                            <p class="font-bold">ICGS Samarth</p><p class="text-sm mb-2">(Firefighting)</p>
-                            <p class="font-bold">ICGS Samudra Prahari</p><p class="text-sm mb-2">(Firefighting)</p>
-                            <p class="font-bold">ICGS Sachet</p><p class="text-sm">(Support)</p>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold text-lg text-orange-800 mb-2">International & Commercial</h4>
-                        <div class="bg-orange-50 p-4 rounded-lg border border-orange-200">
-                            <p class="font-bold">Singapore MPA</p><p class="text-sm mb-2">(Technical Coordination)</p>
-                            <p class="font-bold">SMIT Salvage</p><p class="text-sm">(Salvage Experts)</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-8">
-                    <h4 class="font-semibold text-xl text-slate-800 text-center mb-4">Major Firefighting Challenges</h4>
-                    <div class="grid md:grid-cols-3 gap-4 text-center">
-                        <div class="bg-red-50 p-3 rounded-lg border border-red-200">
-                            <p class="font-bold">🔥 Persistent Explosions</p>
-                            <p class="text-sm">Continued explosions hindered close-range efforts.</p>
-                        </div>
-                        <div class="bg-red-50 p-3 rounded-lg border border-red-200">
-                            <p class="font-bold">🌡️ Extreme Heat</p>
-                            <p class="text-sm">Prevented teams from boarding the vessel.</p>
-                        </div>
-                        <div class="bg-red-50 p-3 rounded-lg border border-red-200">
-                            <p class="font-bold"> 기울어진 선박</p>
-                            <p class="text-sm">10-15 degree list complicated stability and access.</p>
-                        </div>
+                    <div class="lg:col-span-3 bg-white p-6 md:p-8 rounded-lg shadow-md">
+                         <h3 class="text-xl font-bold mb-4">Key Identified Chemical Threats</h3>
+                         <p class="text-slate-600 mb-6">The manifest includes dozens of toxic substances, from known carcinogens to chemicals that are highly reactive with water and air, complicating containment efforts.</p>
+                         <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead class="bg-slate-100 text-slate-600 text-sm">
+                                    <tr>
+                                        <th class="p-3">Substance</th>
+                                        <th class="p-3">Primary Risk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b"><td class="p-3 font-semibold">Tetrachloroethylene</td><td class="p-3">Probable Carcinogen</td></tr>
+                                    <tr class="border-b bg-slate-50"><td class="p-3 font-semibold">Hydroquinone</td><td class="p-3">Mutagenic Potential</td></tr>
+                                    <tr class="border-b"><td class="p-3 font-semibold">Trichlorobenzene</td><td class="p-3">Toxic to Aquatic Life</td></tr>
+                                    <tr class="border-b bg-slate-50"><td class="p-3 font-semibold">Lithium Batteries</td><td class="p-3">Explosive / Fire Hazard</td></tr>
+                                    <tr class="border-b"><td class="p-3 font-semibold">Category 6 Pesticides</td><td class="p-3">Highly Toxic</td></tr>
+                                    <tr class="border-b bg-slate-50"><td class="p-3 font-semibold">Nitrocellulose</td><td class="p-3">Flammable / Explosive</td></tr>
+                                    <tr class="border-b"><td class="p-3 font-semibold">Reactive Chemicals</td><td class="p-3">Ignite on contact with air/water</td></tr>
+                                </tbody>
+                            </table>
+                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            
+            <section id="environment" class="max-w-7xl mx-auto text-center">
+                 <div class="bg-white p-6 md:p-8 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold mb-2">Grave Ecological Threat</h2>
+                    <p class="text-slate-600 mb-8 max-w-3xl mx-auto">This disaster poses a multi-faceted environmental risk far exceeding a simple oil spill, occurring during a critical fish breeding season and marking the second major hazardous spill in the region in under a month.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-red-50 p-6 rounded-lg border border-red-200">
+                            <h3 class="text-xl font-bold text-red-800 mb-3">Compounded Crisis</h3>
+                            <p>The second major hazardous cargo disaster off Kerala in 3 weeks, following the sinking of MSC ELSA 3. This poses a "more serious threat" due to the volume and variety of chemicals.</p>
+                        </div>
+                        <div class="bg-sky-50 p-6 rounded-lg border border-sky-200">
+                            <h3 class="text-xl font-bold text-sky-800 mb-3">Debris Drift Alert</h3>
+                            <p>INCOIS simulations predict lost containers and pollutants will drift towards the Kerala coast, impacting areas between Kozhikode and Kochi, threatening shorelines and navigation.</p>
+                        </div>
+                         <div class="bg-amber-50 p-6 rounded-lg border border-amber-200">
+                            <h3 class="text-xl font-bold text-amber-800 mb-3">Economic Devastation</h3>
+                            <p>The repeated incidents have devastated the local fishing economy, with a sharp decrease in demand for fish due to contamination fears, impacting thousands of livelihoods.</p>
+                        </div>
+                    </div>
+                 </div>
+            </section>
 
-        <section id="cargo" class="mb-16 scroll-mt-24">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">The Chemical Threat: Hazardous Cargo</h2>
-            <p class="mb-8 max-w-4xl text-lg">
-                The fire's severity is directly linked to the vessel's cargo. The MV Wan Hai 503 was carrying over 1,000 containers, with more than 140 containing dangerous goods. This section explores the types of hazardous materials onboard, many of which pose a direct threat to marine life and human health. Use the filters to explore the specific chemical risks.
-            </p>
-             <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h4 class="font-semibold text-xl text-slate-800 text-center mb-4">Hazardous Container Categories</h4>
-                    <div class="chart-container">
-                        <canvas id="cargoChart"></canvas>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h4 class="font-semibold text-xl text-slate-800 mb-4">Identified Chemical Risks</h4>
-                    <div id="chemical-filter-buttons" class="flex flex-wrap gap-2 mb-4">
-                        <button class="bg-blue-500 text-white px-3 py-1 text-sm rounded-full">All</button>
-                        <button class="bg-slate-200 text-slate-700 px-3 py-1 text-sm rounded-full">Carcinogens</button>
-                        <button class="bg-slate-200 text-slate-700 px-3 py-1 text-sm rounded-full">Marine Pollutants</button>
-                        <button class="bg-slate-200 text-slate-700 px-3 py-1 text-sm rounded-full">Flammables</button>
-                    </div>
-                    <div id="chemical-list" class="space-y-2 max-h-80 overflow-y-auto pr-2">
-                    </div>
-                </div>
-            </div>
-        </section>
+        </main>
 
-        <section id="environment" class="scroll-mt-24">
-            <h2 class="text-3xl font-bold text-slate-900 mb-4">Ecological Fallout</h2>
-            <p class="mb-8 max-w-4xl text-lg">
-                The disaster poses a grave, multi-faceted environmental threat beyond a simple oil spill. With up to 50 containers of toxic chemicals lost at sea and 100 tonnes of bunker oil at risk, the incident occurred during a critical fish breeding season, threatening the delicate ecosystem and the livelihoods of coastal communities.
-            </p>
-            <div class="grid md:grid-cols-3 gap-6">
-                 <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h4 class="font-bold text-lg text-blue-900 mb-2">Acute Environmental Threats</h4>
-                    <ul class="list-disc list-inside space-y-2 text-slate-700">
-                        <li><span class="font-semibold">Chemical Contamination:</span> Carcinogens, pesticides, and other toxins pose long-term risks.</li>
-                        <li><span class="font-semibold">Oil Spill Potential:</span> 100 tonnes of bunker oil threaten marine life.</li>
-                        <li><span class="font-semibold">Drifting Debris:</span> Lost containers create navigational hazards for other vessels.</li>
-                        <li><span class="font-semibold">Ecological Timing:</span> Incident occurred during peak fish breeding season, amplifying the biological impact.</li>
-                    </ul>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-lg">
-                    <h4 class="font-bold text-lg text-blue-900 mb-2">Projected Debris Drift</h4>
-                    <p class="mb-4">INCOIS simulations predict that debris and spilled materials will drift towards the Kerala coastline, primarily affecting areas between Kozhikode and Kochi within days of the incident.</p>
-                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                        <div class="text-center font-semibold text-blue-800">KOZHIKODE ⬅️ 🌊 ⬅️ KOCHI</div>
-                    </div>
-                </div>
-                <div class="bg-red-50 p-6 rounded-lg shadow-lg border border-red-200">
-                     <h4 class="font-bold text-lg text-red-900 mb-2">A Disturbing Pattern</h4>
-                    <p>This is the second major hazardous cargo disaster off Kerala in three weeks, following the sinking of the <span class="font-semibold">MSC ELSA 3</span>. Experts warn the Wan Hai 503 incident poses a "more serious threat" due to the quantity and variety of its chemical cargo, compounding the economic and ecological damage to the region.</p>
-                </div>
-            </div>
-        </section>
+        <footer class="text-center p-6 mt-12 bg-sky-800 text-sky-200 text-sm">
+            <p>This infographic is based on the "Comprehensive Overview of the Explosion on the Singapore-Flagged MV Wan Hai 503" report. All data is sourced from this document.</p>
+        </footer>
 
-    </main>
-
-    <footer class="bg-slate-800 text-slate-300 text-center p-4 mt-16">
-        <p class="text-sm">This interactive report is based on the "Comprehensive Overview of the Explosion on the Singapore-Flagged MV Wan Hai 503" dated June 10, 2025.</p>
-    </footer>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            
-            const timelineData = [
-                { date: 'June 7', title: 'Departure', description: 'MV Wan Hai 503 departs from Colombo, Sri Lanka, with its destination set for Mumbai, India.' },
-                { date: 'June 9, 09:30 AM', title: 'Distress Alert', description: 'The Indian Navy receives a distress alert reporting an internal container explosion and fire onboard the vessel.' },
-                { date: 'June 9, 12:30 PM', title: 'Explosion & Fire', description: 'A catastrophic internal container explosion occurs, leading to a major fire that spreads rapidly.' },
-                { date: 'June 9, PM', title: 'Abandon Ship', description: 'The situation becomes unmanageable, forcing 18 of the 22 crew members to abandon the vessel in lifeboats.' },
-                { date: 'June 9, 16:30 PM', title: 'Rescue Operation', description: 'The Indian Navy ship INS Surat successfully rescues the 18 crew members from the lifeboats.' },
-                { date: 'June 10', title: 'Ongoing Emergency', description: 'Firefighting efforts continue as the vessel remains ablaze and listing. A search for the 4 missing crew members is underway.' }
-            ];
-            
-            const timelineControls = document.getElementById('timeline-controls');
-            const timelineDetails = document.getElementById('timeline-details');
-
-            timelineData.forEach((item, index) => {
-                const control = document.createElement('div');
-                control.className = `timeline-item relative pb-8 cursor-pointer ${index === 0 ? 'active' : ''}`;
-                control.innerHTML = `<p class="font-semibold text-slate-800">${item.title}</p><p class="text-sm text-slate-500">${item.date}</p>`;
-                control.addEventListener('click', () => {
-                    document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
-                    control.classList.add('active');
-                    updateTimelineDetails(index);
-                });
-                timelineControls.appendChild(control);
-            });
-            
-            function updateTimelineDetails(index) {
-                const item = timelineData[index];
-                timelineDetails.innerHTML = `
-                    <h4 class="text-2xl font-bold text-slate-800 mb-2">${item.title}</h4>
-                    <p class="text-md font-semibold text-slate-600 mb-4">${item.date}</p>
-                    <p class="text-slate-700">${item.description}</p>
-                `;
-                timelineDetails.classList.remove('fade-in');
-                void timelineDetails.offsetWidth;
-                timelineDetails.classList.add('fade-in');
+        function wrapLabel(str, max_width) {
+            if (str.length <= max_width) return str;
+            const words = str.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).length > max_width) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine += (currentLine === '' ? '' : ' ') + word;
+                }
             }
+            lines.push(currentLine);
+            return lines;
+        }
 
-            updateTimelineDetails(0);
-
-            const crewStatusCtx = document.getElementById('crewStatusChart').getContext('2d');
-            new Chart(crewStatusCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Rescued', 'Missing', 'Injured (Critical)'],
-                    datasets: [{
-                        data: [18, 4, 2],
-                        backgroundColor: ['#16a34a', '#dc2626', '#f59e0b'],
-                        borderColor: '#f8fafc',
-                        borderWidth: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                color: '#475569',
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw} crew members`;
-                                }
-                            }
-                        }
-                    },
-                    cutout: '60%'
-                }
-            });
-            
-            const cargoData = {
-                'Pesticides': 20,
-                'Marine Pollutants': 43,
-                'Flammables/Explosives': 50,
-                'Other Toxins': 44, 
-            };
-            const cargoChartCtx = document.getElementById('cargoChart').getContext('2d');
-            new Chart(cargoChartCtx, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(cargoData),
-                    datasets: [{
-                        label: 'Number of Containers',
-                        data: Object.values(cargoData),
-                        backgroundColor: ['#84cc16', '#22d3ee', '#f97316', '#6b7280'],
-                        borderRadius: 4
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                             callbacks: {
-                                label: function(context) {
-                                    return `Est. ${context.raw} containers`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            grid: {
-                                color: '#e2e8f0'
-                            },
-                             ticks: { color: '#64748b' }
-                        },
-                        y: {
-                            grid: {
-                                display: false
-                            },
-                             ticks: { color: '#334155' }
-                        }
-                    }
-                }
-            });
-            
-            const chemicals = [
-                { name: 'Hydroquinone', risk: 'Mutagenic potential', type: 'Carcinogens' },
-                { name: 'Tetrachloroethylene', risk: 'Probable carcinogen', type: 'Carcinogens' },
-                { name: 'Trichlorobenzene', risk: 'Toxic to aquatic life', type: 'Marine Pollutants' },
-                { name: 'Naphthalene', risk: 'Environmental hazard', type: 'Marine Pollutants' },
-                { name: 'Category 6 Pesticides', risk: 'Highly toxic to marine life', type: 'Marine Pollutants' },
-                { name: 'Lithium batteries', risk: 'Explosive, fire hazard', type: 'Flammables' },
-                { name: 'Ethanol / Isopropyl alcohol', risk: 'Flammable liquid', type: 'Flammables' },
-                { name: 'Nitrocellulose', risk: 'Flammable, explosive solid', type: 'Flammables' },
-                { name: 'Various chemicals', risk: 'Ignite on contact with air/water', type: 'Flammables' }
-            ];
-            
-            const chemicalList = document.getElementById('chemical-list');
-            const filterButtonsContainer = document.getElementById('chemical-filter-buttons');
-            
-            function renderChemicals(filterType) {
-                chemicalList.innerHTML = '';
-                const filteredChemicals = filterType === 'All' ? chemicals : chemicals.filter(c => c.type === filterType);
-                
-                if (filteredChemicals.length === 0) {
-                    chemicalList.innerHTML = '<p class="text-slate-500">No chemicals match this filter.</p>';
-                    return;
-                }
-                
-                filteredChemicals.forEach(chem => {
-                    const div = document.createElement('div');
-                    div.className = 'p-3 bg-slate-50 rounded-md border border-slate-200 fade-in';
-                    div.innerHTML = `
-                        <p class="font-semibold text-slate-800">${chem.name}</p>
-                        <p class="text-sm text-red-600">${chem.risk}</p>
-                    `;
-                    chemicalList.appendChild(div);
-                });
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
             }
-            
-            filterButtonsContainer.addEventListener('click', (e) => {
-                if(e.target.tagName === 'BUTTON') {
-                    document.querySelectorAll('#chemical-filter-buttons button').forEach(btn => {
-                        btn.classList.remove('bg-blue-500', 'text-white');
-                        btn.classList.add('bg-slate-200', 'text-slate-700');
-                    });
-                    e.target.classList.add('bg-blue-500', 'text-white');
-                    e.target.classList.remove('bg-slate-200', 'text-slate-700');
-                    renderChemicals(e.target.textContent);
-                }
-            });
+            return label;
+        };
 
-            renderChemicals('All');
-            
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
+        const crewStatusData = {
+            labels: ['Rescued', 'Missing', 'Injured (Critical)'],
+            datasets: [{
+                data: [18, 4, 2],
+                backgroundColor: ['#047857', '#be123c', '#d97706'],
+                borderColor: '#ffffff',
+                borderWidth: 5,
+            }]
+        };
 
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    if (!mobileMenu.classList.contains('hidden')) {
-                         mobileMenu.classList.add('hidden');
-                    }
-                });
-            });
-
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('section');
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href').substring(1) === entry.target.id) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, { rootMargin: '-30% 0px -70% 0px' });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
+        const crewStatusChartCtx = document.getElementById('crewStatusChart').getContext('2d');
+        new Chart(crewStatusChartCtx, {
+            type: 'doughnut',
+            data: crewStatusData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { font: { size: 14 } } },
+                    tooltip: { callbacks: { title: tooltipTitleCallback } }
+                },
+                cutout: '60%'
+            }
         });
+
+        const cargoData = {
+            labels: [
+                wrapLabel('Flammable / Explosive Materials', 16), 
+                wrapLabel('Marine Pollutants', 16),
+                wrapLabel('Other Toxic Substances', 16),
+                wrapLabel('Pesticides', 16)
+            ],
+            datasets: [{
+                data: [50, 43, 27, 20], 
+                backgroundColor: ['#0369a1', '#0e7490', '#0f766e', '#115e59'],
+                borderRadius: 4,
+            }]
+        };
+
+        const cargoChartCtx = document.getElementById('cargoChart').getContext('2d');
+        new Chart(cargoChartCtx, {
+            type: 'bar',
+            data: cargoData,
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { callbacks: { title: tooltipTitleCallback, label: (c) => `Est. ${c.raw} containers` } }
+                },
+                scales: {
+                    x: { grid: { color: '#e2e8f0' }, ticks: { color: '#64748b' } },
+                    y: { grid: { display: false }, ticks: { color: '#334155' } }
+                }
+            }
+        });
+
     </script>
 </body>
 </html>
