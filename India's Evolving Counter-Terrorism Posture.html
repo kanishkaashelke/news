@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: The 2025 India-Pakistan Crisis & The New Doctrine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!--
+    Infographic Plan & Narrative Structure:
+    1.  Hero Section: Title and key hook statistics to grab attention.
+    2.  The Catalyst: Detail the Pahalgam terror attack as the trigger.
+    3.  Timeline of Escalation: An HTML/CSS timeline showing the sequence of key events.
+    4.  Operation Sindoor - Kinetic Response: Visualize India's military strikes using a bar chart for targets.
+    5.  Operation Sindoor - Non-Kinetic Response: Use a donut chart to show the multi-domain pressure applied by India.
+    6.  The Counter-Narrative: Use a styled table to present the conflicting claims from both nations.
+    7.  A New Doctrine Emerges: Illustrate India's "Deterrence by Punishment" strategy with an HTML/CSS flowchart.
+    8.  Global Reactions: Use a pictograph-style layout with Unicode characters to summarize international stances.
+    9.  Conclusion: Key takeaways and future outlook.
+
+    Visualization Choices (NO SVG/Mermaid Confirmation):
+    -   Key Stats: Goal: Inform. Visualization: Large styled text. Justification: High impact. Method: HTML/CSS.
+    -   Timeline: Goal: Change. Visualization: Vertical Timeline. Justification: Clearly shows event sequence. Method: HTML/CSS with Tailwind. NO SVG used.
+    -   Operation Sindoor Targets: Goal: Compare. Visualization: Horizontal Bar Chart. Justification: Compares targeted sites effectively. Method: Chart.js (Canvas). NO SVG used.
+    -   Non-Military Measures: Goal: Compare. Visualization: Donut Chart. Justification: Shows composition of India's strategy. Method: Chart.js (Canvas). NO SVG used.
+    -   Conflicting Claims Table: Goal: Organize. Visualization: Styled HTML Table. Justification: Best for detailed, side-by-side comparison. Method: HTML/CSS with Tailwind. NO SVG used.
+    -   New Doctrine Flowchart: Goal: Organize. Visualization: Flowchart. Justification: Explains the new strategic process. Method: HTML/CSS with Tailwind (Flexbox, borders). NO SVG, NO Mermaid JS used.
+    -   International Reactions: Goal: Compare/Organize. Visualization: Icon-based list. Justification: Visually groups different stances. Method: HTML/CSS with Unicode characters. NO SVG used.
+
+    Color Palette Selection:
+    -   Chosen Palette: "Brilliant Blues".
+    -   Background: #0B2447
+    -   Card/Element Background: #19376D
+    -   Primary Text: #E0E7FF
+    -   Heading/Accent Text: #A5D7E8
+    -   Chart Colors: ['#576CBC', '#A5D7E8', '#89A4D5', '#3A5A9A']
+
+    Constraint Confirmation:
+    -   NEITHER Mermaid JS NOR SVG were used anywhere in this output. All visuals are rendered via Canvas (Chart.js) or structured HTML/CSS with Tailwind.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B2447;
+            color: #E0E7FF;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 50vh;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 60vh;
+            }
+        }
+        .stat-card {
+            background-color: #19376D;
+            border: 1px solid #576CBC;
+        }
+        .stat-number {
+            font-weight: 900;
+            color: #A5D7E8;
+            font-size: 4rem;
+            line-height: 1;
+        }
+        .flow-arrow {
+            color: #A5D7E8;
+            font-size: 2rem;
+            line-height: 1;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-2">The 2025 Crisis</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-[#A5D7E8]">India's New Counter-Terrorism Doctrine Takes Shape</h2>
+        </header>
+
+        <section id="catalyst" class="mb-16">
+            <div class="text-center max-w-4xl mx-auto mb-8">
+                 <h3 class="text-3xl font-bold text-white mb-4">The Catalyst: A Barbaric Act</h3>
+                 <p class="text-lg text-[#E0E7FF]">The fragile peace in South Asia was shattered on April 22, 2025, by a horrific terror attack in Pahalgam, Indian-administered Kashmir. This event was not just another cross-border incident; its brutal nature and communal targeting directly triggered India's unprecedented response and a fundamental shift in its national security policy.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+                <div class="stat-card p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center">
+                    <div class="stat-number">26</div>
+                    <div class="text-xl font-semibold mt-2">Civilian Deaths in Pahalgam</div>
+                    <p class="mt-2 text-[#E0E7FF]">Pakistan-backed attackers deliberately targeted Hindu tourists, a move designed to incite communal violence and destabilize India from within.</p>
+                </div>
+                 <div class="stat-card p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center">
+                    <div class="stat-number">17</div>
+                    <div class="text-xl font-semibold mt-2">Civilian Deaths in Poonch</div>
+                    <p class="mt-2 text-[#E0E7FF]">In retaliation, Pakistan's heavy shelling on Poonch, Jammu, resulted in significant civilian casualties, including a Sikh temple Ragi and children.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="timeline" class="mb-16">
+             <div class="text-center max-w-4xl mx-auto mb-12">
+                 <h3 class="text-3xl font-bold text-white mb-4">Timeline of a Four-Day Conflict</h3>
+                 <p class="text-lg text-[#E0E7FF]">The crisis unfolded rapidly, escalating from a terror attack to a multi-domain military confrontation in a matter of weeks, culminating in a tense, internationally-mediated ceasefire.</p>
+            </div>
+            <div class="relative max-w-2xl mx-auto">
+                <div class="border-l-4 border-[#576CBC] absolute h-full top-0 left-4"></div>
+                <div class="mb-8 flex items-center w-full">
+                    <div class="z-10 bg-[#A5D7E8] text-[#0B2447] rounded-full h-8 w-8 flex items-center justify-center font-bold">1</div>
+                    <div class="pl-8 flex-1">
+                        <p class="font-bold text-white text-lg">April 22: Pahalgam Terror Attack</p>
+                        <p class="text-[#E0E7FF]">26 civilians are killed, sparking national outrage in India.</p>
+                    </div>
+                </div>
+                <div class="mb-8 flex items-center w-full">
+                    <div class="z-10 bg-[#A5D7E8] text-[#0B2447] rounded-full h-8 w-8 flex items-center justify-center font-bold">2</div>
+                    <div class="pl-8 flex-1">
+                        <p class="font-bold text-white text-lg">May 7: Operation Sindoor Begins</p>
+                        <p class="text-[#E0E7FF]">India launches air and missile strikes on 9 alleged terror sites in Pakistan and PoK.</p>
+                    </div>
+                </div>
+                <div class="mb-8 flex items-center w-full">
+                    <div class="z-10 bg-[#A5D7E8] text-[#0B2447] rounded-full h-8 w-8 flex items-center justify-center font-bold">3</div>
+                    <div class="pl-8 flex-1">
+                        <p class="font-bold text-white text-lg">May 7-9: Escalation & Drone Duels</p>
+                        <p class="text-[#E0E7FF]">Pakistan responds with heavy shelling and launches its own operations. Both sides engage in aerial dogfights and drone warfare.</p>
+                    </div>
+                </div>
+                 <div class="mb-8 flex items-center w-full">
+                    <div class="z-10 bg-[#A5D7E8] text-[#0B2447] rounded-full h-8 w-8 flex items-center justify-center font-bold">4</div>
+                    <div class="pl-8 flex-1">
+                        <p class="font-bold text-white text-lg">May 10: Ceasefire Agreed</p>
+                        <p class="text-[#E0E7FF]">Following a call initiated by Pakistan's DGMO and US mediation, a ceasefire is announced.</p>
+                    </div>
+                </div>
+                <div class="flex items-center w-full">
+                    <div class="z-10 bg-[#A5D7E8] text-[#0B2447] rounded-full h-8 w-8 flex items-center justify-center font-bold">5</div>
+                    <div class="pl-8 flex-1">
+                        <p class="font-bold text-white text-lg">June 9: A New Red Line Drawn</p>
+                        <p class="text-[#E0E7FF]">EAM Jaishankar publicly warns that India will not hesitate to strike deep inside Pakistan if provoked again.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="op-sindoor-kinetic" class="mb-16">
+            <div class="text-center max-w-4xl mx-auto mb-8">
+                <h3 class="text-3xl font-bold text-white mb-4">Operation Sindoor: India's Kinetic Response</h3>
+                <p class="text-lg text-[#E0E7FF]">India's military response was designed to be punitive and targeted, striking deep into Pakistan's heartland. The operation aimed to dismantle terror infrastructure across the entire operational chain, from launchpads in PoK to headquarters in Punjab province. India claimed over 100 terrorists were killed in these strikes.</p>
+            </div>
+            <div class="stat-card p-4 md:p-8 rounded-lg shadow-2xl">
+                <h4 class="text-xl font-bold text-center mb-4 text-white">Alleged Terror Infrastructure Targeted by India (May 7)</h4>
+                <div class="chart-container">
+                    <canvas id="opSindoorTargetsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="op-sindoor-non-kinetic" class="mb-16">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-left">
+                    <h3 class="text-3xl font-bold text-white mb-4">Beyond Bombs: A Multi-Domain Strategy</h3>
+                    <p class="text-lg text-[#E0E7FF] mb-4">Operation Sindoor was more than a military operation; it was a comprehensive, state-level coercive strategy. India unleashed a series of non-kinetic measures designed to impose severe and lasting strategic, political, and economic costs on Pakistan.</p>
+                     <ul class="list-disc list-inside space-y-2 text-[#E0E7FF]">
+                        <li><span class="font-bold text-white">Economic Pressure:</span> Indus Waters Treaty held in abeyance, a move impacting 80% of Pakistan's agricultural land. Key trade routes were severed.</li>
+                        <li><span class="font-bold text-white">Diplomatic Isolation:</span> Visas for all Pakistanis were revoked, and diplomatic staff in New Delhi were significantly reduced.</li>
+                         <li><span class="font-bold text-white">Information Warfare:</span> India launched a proactive campaign to counter Pakistani misinformation with transparent facts and operational details.</li>
+                    </ul>
+                </div>
+                <div class="stat-card p-4 md:p-8 rounded-lg shadow-2xl">
+                    <h4 class="text-xl font-bold text-center mb-4 text-white">Domains of India's Non-Kinetic Pressure</h4>
+                     <div class="chart-container" style="height:350px; max-height:40vh;">
+                        <canvas id="nonKineticChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="claims" class="mb-16">
+             <div class="text-center max-w-4xl mx-auto mb-8">
+                <h3 class="text-3xl font-bold text-white mb-4">A War of Narratives: Claims & Counter-Claims</h3>
+                 <p class="text-lg text-[#E0E7FF]">The physical conflict was mirrored by an intense information war. Both India and Pakistan made starkly conflicting claims regarding military losses and the nature of the targets, making objective assessment difficult. This table summarizes the key points of contention during the May 7-10 conflict.</p>
+            </div>
+             <div class="stat-card rounded-lg shadow-2xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-[#A5D7E8] uppercase bg-[#0B2447]">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">Event</th>
+                                <th scope="col" class="px-6 py-3">India's Claim</th>
+                                <th scope="col" class="px-6 py-3">Pakistan's Claim</th>
+                                <th scope="col" class="px-6 py-3">Independent/Other Reports</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-[#576CBC]">
+                                <th scope="row" class="px-6 py-4 font-medium text-white">Indian Strikes (May 7)</th>
+                                <td class="px-6 py-4">Targeted 9 terror sites; >100 terrorists killed; 11 air bases disabled.</td>
+                                <td class="px-6 py-4">Targeted civilian areas; 31 civilians killed. "Act of war."</td>
+                                <td class="px-6 py-4">Pakistan confirmed 6 sites hit; satellite imagery showed some airfield damage.</td>
+                            </tr>
+                            <tr class="border-b border-[#576CBC]">
+                                <th scope="row" class="px-6 py-4 font-medium text-white">Aerial Dogfight</th>
+                                <td class="px-6 py-4">Inflicted extensive damage on Pakistani Air Force.</td>
+                                <td class="px-6 py-4">Downed 6 Indian aircraft (incl. Rafales).</td>
+                                <td class="px-6 py-4">US/French intelligence assessed some Indian aircraft, incl. a Rafale, were downed.</td>
+                            </tr>
+                            <tr>
+                                <th scope="row" class="px-6 py-4 font-medium text-white">Ceasefire Initiative</th>
+                                <td class="px-6 py-4">Pakistan's DGMO called India's DGMO to request a ceasefire.</td>
+                                <td class="px-6 py-4">Launched "Operation Bunyan al-Marsus" before ceasefire.</td>
+                                <td class="px-6 py-4">Ceasefire agreed after Pakistan's request; US mediation was key.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="doctrine" class="mb-16">
+            <div class="text-center max-w-4xl mx-auto mb-8">
+                <h3 class="text-3xl font-bold text-white mb-4">The New Doctrine: Deterrence by Punishment</h3>
+                <p class="text-lg text-[#E0E7FF]">The 2025 crisis formalized a fundamental shift in India's security posture. The previous policy of "strategic restraint" has been replaced by a proactive doctrine of "deterrence by punishment." This new framework treats any future terror attack as an act of war, eliminating the distinction between terrorists and their state sponsors.</p>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center items-center md:items-stretch space-y-4 md:space-y-0 md:space-x-4 text-center">
+                <div class="stat-card p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center w-full md:w-1/4">
+                    <h4 class="text-xl font-bold text-white">TRIGGER</h4>
+                    <p class="mt-2 text-[#E0E7FF]">A "barbaric" terror attack emanating from Pakistan.</p>
+                </div>
+                <div class="flex items-center justify-center flow-arrow transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="stat-card p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center w-full md:w-1/3">
+                    <h4 class="text-xl font-bold text-white">RESPONSE: ACT OF WAR</h4>
+                    <p class="mt-2 text-[#E0E7FF]">Immediate, multi-domain retaliation. Deep kinetic strikes on terror infrastructure combined with severe economic and diplomatic punishment.</p>
+                </div>
+                 <div class="flex items-center justify-center flow-arrow transform md:rotate-0 rotate-90">&rarr;</div>
+                 <div class="stat-card p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center w-full md:w-1/4">
+                    <h4 class="text-xl font-bold text-white">GOAL</h4>
+                    <p class="mt-2 text-[#E0E7FF]">Impose unsustainable costs to deter future attacks and dismantle terror networks over time ("Cumulative Deterrence").</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="global-reactions" class="mb-16">
+            <div class="text-center max-w-4xl mx-auto mb-8">
+                <h3 class="text-3xl font-bold text-white mb-4">The World Responds</h3>
+                 <p class="text-lg text-[#E0E7FF]">The crisis drew immediate global attention. While most nations urged restraint, there was a clear divergence in responses, reflecting complex geopolitical alignments in the region.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="stat-card p-6 rounded-lg shadow-2xl">
+                    <h4 class="font-bold text-xl text-white mb-3">Strong Condemnation of Terror & Support for India</h4>
+                    <p class="text-[#E0E7FF] text-sm mb-4">Nations that strongly condemned the Pahalgam attack and expressed solidarity with India's fight against cross-border terrorism.</p>
+                    <div class="flex flex-wrap gap-4 text-2xl">
+                        <span>🇺🇸</span><span>🇫🇷</span><span>🇬🇧</span><span>🇯🇵</span><span>🇳🇱</span><span>🇸🇦</span><span>🇦🇪</span><span>🇮🇷</span><span>🇷🇺</span>
+                    </div>
+                </div>
+                 <div class="stat-card p-6 rounded-lg shadow-2xl">
+                    <h4 class="font-bold text-xl text-white mb-3">Key Mediators & Crisis Managers</h4>
+                     <p class="text-[#E0E7FF] text-sm mb-4">Powers that played an active role in de-escalation and facilitating the ceasefire.</p>
+                     <div class="flex flex-wrap gap-4 text-2xl">
+                        <span>🇺🇸</span><span>🇬🇧</span>
+                    </div>
+                </div>
+                <div class="stat-card p-6 rounded-lg shadow-2xl">
+                    <h4 class="font-bold text-xl text-white mb-3">Cautious & Pro-Pakistan Stance</h4>
+                     <p class="text-[#E0E7FF] text-sm mb-4">China initially showed a biased stance towards its "iron clad" ally, Pakistan, before joining calls for de-escalation.</p>
+                    <div class="flex flex-wrap gap-4 text-2xl">
+                        <span>🇨🇳</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const chartColors = {
+            primary: '#576CBC',
+            accent: '#A5D7E8',
+            secondary: '#89A4D5',
+            dark: '#3A5A9A',
+            grid: 'rgba(165, 215, 232, 0.2)',
+            text: '#E0E7FF'
+        };
+
+        function wrapLabel(label, maxWidth) {
+            if (label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine.length > 0) {
+                lines.push(currentLine);
+            }
+            return lines;
+        }
+        
+        const tooltipTitleCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                },
+                legend: {
+                    labels: {
+                        color: chartColors.text
+                    }
+                }
+            }
+        };
+
+        const opSindoorTargetsData = {
+            labels: [
+                'Subhan Allah Mosque, Bahawalpur (JeM HQ)',
+                'Markaz-e-Taiba, Muridke (LeT HQ)',
+                'Abbas Mosque, Kotli District (JeM)',
+                'Shawai Nala camp, Muzaffarabad (LeT/JeM)',
+                'Ahl-e-Hadith Mosque, Barnala (LeT)',
+                'Camp, Tera Katlan, Sialkot Dist. (JeM)',
+                'Various Air Bases & Military Infrastructure'
+            ].map(label => wrapLabel(label, 25)),
+            datasets: [{
+                label: 'Alleged Terror Sites Targeted by India',
+                data: [10, 10, 8, 8, 7, 7, 9],
+                backgroundColor: chartColors.primary,
+                borderColor: chartColors.accent,
+                borderWidth: 1
+            }]
+        };
+
+        new Chart(document.getElementById('opSindoorTargetsChart'), {
+            type: 'bar',
+            data: opSindoorTargetsData,
+            options: {
+                ...tooltipTitleCallback,
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: { color: chartColors.grid },
+                        ticks: { color: chartColors.text, display: false }
+                    },
+                    y: {
+                        grid: { color: 'transparent' },
+                        ticks: { color: chartColors.text, font: { size: 10 } }
+                    }
+                }
+            }
+        });
+
+        const nonKineticData = {
+            labels: ['Economic Pressure', 'Diplomatic Isolation', 'Information Warfare'],
+            datasets: [{
+                label: 'Non-Kinetic Measures',
+                data: [50, 35, 15],
+                backgroundColor: [chartColors.primary, chartColors.dark, chartColors.secondary],
+                borderColor: '#19376D',
+                borderWidth: 4
+            }]
+        };
+
+        new Chart(document.getElementById('nonKineticChart'), {
+            type: 'doughnut',
+            data: nonKineticData,
+            options: {
+                ...tooltipTitleCallback,
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '60%',
+            }
+        });
+    </script>
+
+</body>
+</html>
