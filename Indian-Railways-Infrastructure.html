@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Railways: Doubling Lines, Boosting Freight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-gradient-to-r from-[#00449E] to-[#086788] text-white text-center py-12 px-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-2 tracking-tight">Powering India's Growth</h1>
+        <p class="text-lg md:text-xl font-light max-w-3xl mx-auto">A Strategic ₹6,405 Crore Investment to Transform India's Railway Infrastructure and Boost National Logistics.</p>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section id="overview" class="mb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-[#00449E] mb-2">Project At a Glance</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Two pivotal line doubling projects are set to enhance freight capacity, improve connectivity, and stimulate economic development across three states.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="kpi-card border-l-4 border-[#07A0C3]">
+                    <div class="text-4xl mb-2">↔️</div>
+                    <h3 class="text-xl font-semibold text-gray-700">Total Length</h3>
+                    <p class="text-4xl font-bold text-[#086788]">318 km</p>
+                </div>
+                <div class="kpi-card border-l-4 border-[#F0C808]">
+                    <div class="text-4xl mb-2">📦</div>
+                    <h3 class="text-xl font-semibold text-gray-700">Freight Boost</h3>
+                    <p class="text-4xl font-bold text-[#086788]">49 MTPA</p>
+                </div>
+                <div class="kpi-card border-l-4 border-[#DD1C1A]">
+                    <div class="text-4xl mb-2">🏘️</div>
+                    <h3 class="text-xl font-semibold text-gray-700">Villages Connected</h3>
+                    <p class="text-4xl font-bold text-[#086788]">1,408</p>
+                </div>
+                <div class="kpi-card border-l-4 border-[#00449E]">
+                    <div class="text-4xl mb-2">🧑‍🤝‍🧑</div>
+                    <h3 class="text-xl font-semibold text-gray-700">Population Benefited</h3>
+                    <p class="text-4xl font-bold text-[#086788]">28.19 Lakh</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="economic-impact" class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#00449E] mb-4 text-center">Freight Capacity Surge (49 MTPA)</h3>
+                     <p class="text-center text-gray-600 mb-4">This significant boost in freight capacity is a strategic move to de-congest critical routes. The chart below illustrates how each new line contributes to the total annual freight increase.</p>
+                    <div class="chart-container">
+                        <canvas id="freightBoostChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#00449E] mb-4 text-center">Fueling Core Industries</h3>
+                    <p class="text-center text-gray-600 mb-6">The enhanced lines will form a vital artery for India's core economic sectors, ensuring the efficient transport of essential raw materials and finished goods.</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <span class="bg-[#07A0C3] text-white px-4 py-2 rounded-full font-medium">Coal</span>
+                        <span class="bg-[#086788] text-white px-4 py-2 rounded-full font-medium">Iron Ore</span>
+                        <span class="bg-[#07A0C3] text-white px-4 py-2 rounded-full font-medium">Finished Steel</span>
+                        <span class="bg-[#086788] text-white px-4 py-2 rounded-full font-medium">Cement</span>
+                        <span class="bg-[#07A0C3] text-white px-4 py-2 rounded-full font-medium">Fertilizers</span>
+                        <span class="bg-[#086788] text-white px-4 py-2 rounded-full font-medium">Petroleum Products</span>
+                        <span class="bg-[#07A0C3] text-white px-4 py-2 rounded-full font-medium">Foodgrains</span>
+                    </div>
+                    <div class="mt-8 text-center">
+                         <div class="text-2xl mb-2">💼</div>
+                         <h4 class="text-xl font-semibold text-gray-700">Employment Generation</h4>
+                         <p class="text-3xl font-bold text-[#00449E]">108 Lakh Human-Days</p>
+                         <p class="text-gray-600">of direct employment during construction.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="project-deep-dive" class="mb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-[#00449E] mb-2">Project Deep Dive: A Tale of Two Corridors</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">While both projects aim to enhance the network, they serve distinct strategic purposes, strengthening different regional economic ecosystems. The following chart provides a direct comparison of their key metrics.</p>
+            </div>
+             <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="chart-container h-[500px] max-h-[600px] md:h-[400px]">
+                    <canvas id="projectComparisonChart"></canvas>
+                </div>
+             </div>
+        </section>
+
+        <section id="socio-environmental" class="mb-16">
+             <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-[#00449E] mb-2">A Greener, More Connected India</h2>
+                <p class="max-w-2xl mx-auto text-gray-600">Beyond the economic figures, these projects represent a major step towards environmental sustainability and social inclusion.</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                 <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#00449E] mb-4 text-center">Positive Environmental Impact</h3>
+                    <p class="text-center text-gray-600 mb-6">By shifting freight from road to the more energy-efficient rail network, India stands to make significant gains in its climate goals, reducing both fossil fuel dependency and carbon emissions.</p>
+                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div>
+                             <p class="text-6xl">💧</p>
+                             <p class="text-2xl font-bold text-[#07A0C3] mt-2">52 Cr Litres</p>
+                             <p class="text-gray-600">Annual Reduction in Oil Imports</p>
+                        </div>
+                         <div>
+                             <p class="text-6xl">💨</p>
+                             <p class="text-2xl font-bold text-[#07A0C3] mt-2">264 Cr kg</p>
+                             <p class="text-gray-600">Annual Cut in CO2 Emissions</p>
+                        </div>
+                         <div>
+                             <p class="text-6xl">🌳</p>
+                             <p class="text-2xl font-bold text-[#07A0C3] mt-2">11 Cr Trees</p>
+                             <p class="text-gray-600">Equivalent Carbon Sequestration</p>
+                        </div>
+                     </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-2xl font-bold text-[#00449E] mb-4 text-center">Enhancing Social Fabric</h3>
+                    <p class="text-center text-gray-600 mb-4">This chart breaks down the direct social benefits, showing the number of villages and residents in each project area who will gain improved access to markets and services.</p>
+                    <div class="chart-container">
+                        <canvas id="socialImpactChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <section id="strategic-context" class="bg-white rounded-lg shadow-md p-8">
+            <div class="text-center">
+                 <h2 class="text-3xl font-bold text-[#00449E] mb-2">Part of a National Vision: PM-Gati Shakti</h2>
+                <p class="max-w-3xl mx-auto text-gray-600 mb-8">These projects are not isolated efforts. They are integral components of the PM-Gati Shakti National Master Plan, which aims to create a seamless, integrated, multi-modal transport network to power India's economic engine for decades to come.</p>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+                    <div class="bg-blue-100 text-[#00449E] p-4 rounded-lg w-full md:w-auto">
+                        <div class="font-bold text-lg">Integrated Planning</div>
+                    </div>
+                    <div class="text-2xl font-bold text-blue-300 transform md:rotate-0 rotate-90">&rarr;</div>
+                    <div class="bg-teal-100 text-[#086788] p-4 rounded-lg w-full md:w-auto">
+                        <div class="font-bold text-lg">Multi-Modal Connectivity</div>
+                    </div>
+                    <div class="text-2xl font-bold text-teal-300 transform md:rotate-0 rotate-90">&rarr;</div>
+                    <div class="bg-yellow-100 text-yellow-800 p-4 rounded-lg w-full md:w-auto">
+                         <div class="font-bold text-lg">Reduced Logistics Costs</div>
+                    </div>
+                     <div class="text-2xl font-bold text-yellow-300 transform md:rotate-0 rotate-90">&rarr;</div>
+                    <div class="bg-red-100 text-[#DD1C1A] p-4 rounded-lg w-full md:w-auto">
+                        <div class="font-bold text-lg">Accelerated Economic Growth</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#00449E] text-white text-center p-4 mt-8">
+        <p>An Infographic by Canvas Infographics. Data sourced from the Comprehensive Analysis of Indian Railways' Line Doubling Projects Report.</p>
+    </footer>
+
+    <script>
+        const brilliantBlues = {
+            primary: '#00449E',
+            secondary: '#086788',
+            accent1: '#07A0C3',
+            accent2: '#F0C808',
+            accent3: '#DD1C1A',
+            textLight: '#FFFFFF',
+            textDark: '#333333'
+        };
+
+        const commonTooltipConfig = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                },
+                legend: {
+                    labels: {
+                        color: brilliantBlues.textDark,
+                    }
+                }
+            }
+        };
+
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            let wrapped = [];
+            let words = str.split(' ');
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + word).length > maxWidth) {
+                    wrapped.push(currentLine.trim());
+                    currentLine = '';
+                }
+                currentLine += word + ' ';
+            });
+            wrapped.push(currentLine.trim());
+            return wrapped.filter(line => line.length > 0);
+        }
+
+        const freightBoostCtx = document.getElementById('freightBoostChart').getContext('2d');
+        new Chart(freightBoostCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Koderma-Barkakana Line', 'Ballari-Chikjajur Line'],
+                datasets: [{
+                    label: 'Freight Increase (MTPA)',
+                    data: [30.4, 18.9],
+                    backgroundColor: [brilliantBlues.accent1, brilliantBlues.secondary],
+                    borderColor: [brilliantBlues.textLight, brilliantBlues.textLight],
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                     ...commonTooltipConfig.plugins,
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                           color: brilliantBlues.textDark,
+                           padding: 20
+                        }
+                    },
+                    title: {
+                        display: false,
+                    }
+                },
+                cutout: '60%'
+            }
+        });
+        
+        const projectComparisonLabels = [
+            'Cost (₹ Crore)', 
+            'Length (km)', 
+            'Freight Increase (MTPA)'
+        ];
+
+        const projectComparisonCtx = document.getElementById('projectComparisonChart').getContext('2d');
+        new Chart(projectComparisonCtx, {
+            type: 'bar',
+            data: {
+                labels: projectComparisonLabels,
+                datasets: [
+                    {
+                        label: 'Koderma-Barkakana',
+                        data: [3063, 133, 30.4],
+                        backgroundColor: brilliantBlues.secondary,
+                        borderColor: brilliantBlues.secondary,
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Ballari-Chikjajur',
+                        data: [3342, 185, 18.9],
+                        backgroundColor: brilliantBlues.accent1,
+                        borderColor: brilliantBlues.accent1,
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        ticks: { color: brilliantBlues.textDark },
+                        grid: { display: false }
+                    },
+                    x: {
+                        ticks: { color: brilliantBlues.textDark },
+                        grid: { color: '#e0e0e0' }
+                    }
+                },
+                plugins: {
+                     ...commonTooltipConfig.plugins,
+                    legend: {
+                        position: 'top',
+                         labels: {
+                           color: brilliantBlues.textDark
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Comparative Analysis of Line Doubling Projects',
+                        color: brilliantBlues.textDark,
+                        font: { size: 16 }
+                    }
+                }
+            }
+        });
+
+        const socialImpactLabels = ['Villages Benefited', 'Population Benefited (Lakhs)'];
+        const wrappedSocialImpactLabels = socialImpactLabels.map(label => wrapLabel(label, 16));
+        const socialImpactCtx = document.getElementById('socialImpactChart').getContext('2d');
+        new Chart(socialImpactCtx, {
+            type: 'bar',
+            data: {
+                labels: wrappedSocialImpactLabels,
+                datasets: [
+                    {
+                        label: 'Koderma-Barkakana',
+                        data: [938, 15],
+                        backgroundColor: brilliantBlues.secondary,
+                    },
+                    {
+                        label: 'Ballari-Chikjajur',
+                        data: [470, 13.19],
+                        backgroundColor: brilliantBlues.accent1,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { 
+                        stacked: true,
+                        ticks: { color: brilliantBlues.textDark },
+                        grid: { display: false }
+                    },
+                    y: { 
+                        stacked: true,
+                        ticks: { color: brilliantBlues.textDark },
+                        grid: { color: '#e0e0e0' }
+                    }
+                },
+                plugins: {
+                    ...commonTooltipConfig.plugins,
+                    title: {
+                        display: false,
+                    },
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                           color: brilliantBlues.textDark,
+                           padding: 20
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
