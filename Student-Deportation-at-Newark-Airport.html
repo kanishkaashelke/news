@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: US Immigration Policy and its Impact on Indian Nationals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- 
+    Infographic Narrative Plan:
+    1.  Hook: Start with the visceral Newark Airport incident to capture attention.
+    2.  Data Context: Present the hard numbers on the surge in deportations.
+    3.  Policy Analysis: Detail the specific policy shifts causing this trend (student visa dip, OPT risks).
+    4.  Process Visualization: Demystify the deportation legal process with a simplified flowchart.
+    5.  Market Shift: Show the resulting trend of Indian students looking at alternative countries.
+    6.  Human Impact: Conclude with the qualitative data on student fear and the changing "American Dream."
+    
+    Visualization Choices (NO SVG / NO MERMAID JS):
+    -   Deportation Surge Data: Goal: Change/Inform -> Chosen Viz: Single Big Number + Donut Chart (Chart.js/Canvas). Justification: Big number for impact, donut for composition.
+    -   Student Visa & OPT Data: Goal: Inform -> Chosen Viz: Dual "Single Big Number" cards. Justification: Clear, side-by-side comparison of key metrics.
+    -   Deportation Process: Goal: Organize -> Chosen Viz: HTML/CSS Flowchart. Justification: Best method to show a process without SVG/Mermaid.
+    -   Alternative Destinations: Goal: Compare -> Chosen Viz: Bar Chart (Chart.js/Canvas). Justification: Standard, effective way to compare categories.
+    -   Student Sentiment: Goal: Inform (Qualitative) -> Chosen Viz: Styled HTML blockquotes. Justification: More direct and readable than a word cloud for specific phrases.
+
+    Color Palette Selection: "Brilliant Blues" for a professional, high-contrast, and engaging theme.
+    
+    Confirmation: NEITHER Mermaid JS NOR SVG were used in this output. All visuals are either Chart.js (Canvas) or structured HTML/CSS with Tailwind.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F4F8; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 380px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #00A1E4, #005082);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-[#005082] mb-2">A Shifting Landscape</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An analysis of the recent surge in US deportations of Indian nationals and the profound impact on student aspirations.</p>
+        </header>
+
+        <main class="space-y-12">
+            <section id="incident" class="bg-white rounded-xl shadow-lg p-6 md:p-8 border-l-8 border-[#00A1E4]">
+                <h2 class="text-2xl font-bold text-[#005082] mb-4">The Flashpoint: An Incident at Newark Airport</h2>
+                <p class="text-gray-600 mb-6">A viral video in June 2025 showing an Indian national being forcibly restrained at Newark Airport ignited a firestorm of public concern. While initially thought to be a student, official reports confirmed he had entered the US illegally and was being deported under a court order. The incident, however, became a symbol of a much larger trend.</p>
+                <div class="bg-[#F0F4F8] rounded-lg p-6 text-center">
+                    <p class="text-6xl mb-4">“💔”</p>
+                    <blockquote class="text-xl md:text-2xl font-semibold text-[#0077C0]">"Handcuffed, crying, treated like a criminal."</blockquote>
+                    <cite class="block text-gray-500 mt-2 not-italic">- Eyewitness Kunal Jain</cite>
+                </div>
+            </section>
+
+            <section id="deportations" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                 <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">The Numbers: A Surge in Deportations</h2>
+                 <p class="text-gray-600 mb-8 text-center max-w-3xl mx-auto">The Newark case is not an isolated event. Data from early 2025 reveals a significant and rapid increase in the deportation of Indian nationals under the current US administration's intensified immigration enforcement policies.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="text-center p-6 rounded-lg bg-[#F0F4F8]">
+                        <p class="text-7xl md:text-8xl font-black gradient-text">~1,080</p>
+                        <p class="text-xl font-semibold text-gray-700 mt-2">Indian Nationals Deported</p>
+                        <p class="text-gray-500">(Jan - May 2025)</p>
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <h3 class="text-xl font-bold text-center text-[#0077C0] mb-4">Deportation Methods</h3>
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="deportationMethodChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="policy" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">The Policy Shift: A Chilling Effect on Students</h2>
+                <p class="text-gray-600 mb-8 text-center max-w-3xl mx-auto">The crackdown extends beyond illegal entry, creating a climate of fear and uncertainty for legally present international students. Heightened scrutiny, visa revocations for minor infractions, and threats to post-study work programs are reshaping the educational landscape.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                        <p class="text-6xl font-black text-[#00A1E4]">-50%</p>
+                        <p class="text-lg font-semibold text-[#0077C0] mt-2">Dip in Visas Issued to Indian Students</p>
+                        <p class="text-gray-500 mt-1">Reflecting heightened administrative barriers.</p>
+                    </div>
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                        <p class="text-6xl font-black text-[#00A1E4]">69,000+</p>
+                        <p class="text-lg font-semibold text-[#0077C0] mt-2">Students on OPT Facing Risk</p>
+                        <p class="text-gray-500 mt-1">Due to stricter rules and potential rollbacks.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="process" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                 <h2 class="text-2xl font-bold text-[#005082] mb-4">The Legal Labyrinth: Understanding the Deportation Process</h2>
+                 <p class="text-gray-600 mb-8 max-w-3xl">For an individual who enters the US without authorization, the path to removal is swift and severe. The process often bypasses extensive judicial review, leading to rapid deportation and long-term bars on re-entry. The flowchart below outlines the typical journey.</p>
+                 <div class="flex flex-col items-center space-y-4 font-sans">
+                    <div class="bg-[#00A1E4] text-white font-bold p-4 rounded-lg shadow-md w-full max-w-md text-center">1. Illegal Entry into the U.S.</div>
+                    <div class="text-4xl text-[#0077C0]">↓</div>
+                    <div class="bg-gray-100 p-4 rounded-lg shadow-md w-full max-w-xl text-center">
+                        <p class="font-bold text-[#0077C0]">Apprehension by Authorities (ICE/CBP)</p>
+                    </div>
+                    <div class="text-4xl text-[#0077C0]">↓</div>
+                     <div class="w-full max-w-2xl p-4 border-2 border-dashed border-gray-300 rounded-lg">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
+                            <div class="absolute top-1/2 left-0 w-full h-0.5 bg-gray-300 hidden md:block"></div>
+                            <div class="absolute top-0 left-1/2 w-0.5 h-full bg-gray-300 md:hidden"></div>
+
+                            <div class="flex flex-col items-center p-3">
+                                <h3 class="font-semibold text-lg mb-2 text-center text-[#005082]">Path A: Expedited Removal</h3>
+                                <div class="bg-red-100 border border-red-300 p-3 rounded-md text-sm text-red-800 text-center w-full">
+                                    <p>Rapid deportation without court hearing. Can occur in a single day. Common for recent illegal entries.</p>
+                                </div>
+                            </div>
+                             <div class="flex flex-col items-center p-3">
+                                <h3 class="font-semibold text-lg mb-2 text-center text-[#005082]">Path B: Formal Removal Proceedings</h3>
+                                <div class="bg-yellow-100 border border-yellow-300 p-3 rounded-md text-sm text-yellow-800 text-center w-full">
+                                    <p>Case goes before an Immigration Judge. Can result in a formal Court Order for deportation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-4xl text-[#0077C0]">↓</div>
+                    <div class="bg-red-600 text-white font-bold p-4 rounded-lg shadow-lg w-full max-w-md text-center">
+                        <p>Deportation & Future Entry Bars</p>
+                        <p class="font-normal text-sm">(3-Year, 10-Year, or Permanent Inadmissibility)</p>
+                    </div>
+                 </div>
+            </section>
+
+            <section id="alternatives" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">Shifting Horizons: The Search for Alternatives</h2>
+                <p class="text-gray-600 mb-8 text-center max-w-3xl mx-auto">The "American Dream" is being re-evaluated. Faced with a high-risk, high-cost investment and an uncertain future, a strategic shift in student preferences is underway. Indian students are increasingly exploring other countries for higher education.</p>
+                <div class="chart-container mx-auto">
+                    <canvas id="countryPreferenceChart"></canvas>
+                </div>
+                 <p class="text-sm text-gray-500 text-center mt-4">Chart displays a representative model of shifting student interest based on report findings.</p>
+            </section>
+
+             <section id="impact" class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-bold text-[#005082] mb-4 text-center">The Human Impact: "A Pervasive Sense of Fear"</h2>
+                <p class="text-gray-600 mb-8 text-center max-w-3xl mx-auto">Beyond statistics, the policies have fostered a deep sense of anxiety. Students feel expendable, constantly worried that a minor mistake could lead to deportation, shattering their educational and life aspirations.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <blockquote class="bg-gray-100 p-6 rounded-lg border-l-4 border-[#00A1E4]">
+                        <p class="text-gray-700 italic">"Students are terrified that some small mistake, anything they posted or said, might get them abducted and deported, ruining their education."</p>
+                        <cite class="block text-right text-gray-500 mt-2 not-italic">- Report Finding</cite>
+                    </blockquote>
+                     <blockquote class="bg-gray-100 p-6 rounded-lg border-l-4 border-[#00A1E4]">
+                        <p class="text-gray-700 italic">"The US is no longer a 'dreamland'... It feels more like 'hell' now."</p>
+                        <cite class="block text-right text-gray-500 mt-2 not-italic">- Social Media Commentary</cite>
+                    </blockquote>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-12 pt-8 border-t border-gray-300">
+            <p class="text-gray-500">Infographic based on the "Analysis of the Newark Airport Deportation Incident and its Broader Immigration Policy Context" report.</p>
+            <p class="text-sm text-gray-400 mt-1">Data as of June 2025. All visualizations are for illustrative purposes.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function wrapLabel(label, maxWidth) {
+            if (typeof label !== 'string' || label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    if (currentLine.length > 0) {
+                        currentLine += ' ' + word;
+                    } else {
+                        currentLine = word;
+                    }
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const commonTooltipCallback = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                },
+                legend: {
+                    labels: {
+                        font: {
+                           size: 14
+                        }
+                    }
+                }
+            }
+        };
+
+        const colors = {
+            blue1: '#00A1E4',
+            blue2: '#0077C0',
+            blue3: '#005082',
+            grey: '#B0BEC5'
+        };
+
+        const deportationData = {
+            labels: ['Commercial Flights', 'Chartered Flights', 'Other (e.g., via Panama)'],
+            datasets: [{
+                label: 'Deportation Method',
+                data: [670, 341, 69],
+                backgroundColor: [
+                    colors.blue2,
+                    colors.blue3,
+                    colors.grey
+                ],
+                borderColor: '#FFFFFF',
+                borderWidth: 2,
+                hoverOffset: 4
+            }]
+        };
+
+        const deportationCtx = document.getElementById('deportationMethodChart').getContext('2d');
+        new Chart(deportationCtx, {
+            type: 'doughnut',
+            data: deportationData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                ...commonTooltipCallback,
+                plugins: {
+                    ...commonTooltipCallback.plugins,
+                    legend: {
+                        position: 'bottom',
+                    }
+                }
+            }
+        });
+        
+        const countryLabels = ['United States', 'Germany', 'France', 'New Zealand', 'Russia & Others'];
+        const wrappedCountryLabels = countryLabels.map(label => wrapLabel(label, 16));
+
+        const countryData = {
+            labels: wrappedCountryLabels,
+            datasets: [{
+                label: 'Change in Student Preference',
+                data: [-50, 45, 35, 30, 25],
+                backgroundColor: [
+                    colors.grey,
+                    colors.blue1,
+                    colors.blue2,
+                    colors.blue3,
+                    '#546E7A' 
+                ],
+                borderColor: [
+                    '#90A4AE',
+                    '#0077B6',
+                    '#023E8A',
+                    '#001219',
+                    '#37474F'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        const countryCtx = document.getElementById('countryPreferenceChart').getContext('2d');
+        new Chart(countryCtx, {
+            type: 'bar',
+            data: countryData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Percentage Change in Interest (%)'
+                        }
+                    },
+                     y: {
+                        ticks: {
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    ...commonTooltipCallback.plugins,
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
