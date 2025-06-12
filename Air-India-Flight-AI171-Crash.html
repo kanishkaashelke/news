@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air India Flight AI171 Crash: A Comprehensive Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <!--
+    Narrative & Structure Plan:
+    1. Introduction/Hook: Big, impactful numbers about the tragedy.
+    2. Timeline: A visual representation of the flight's final moments.
+    3. Human Toll: Breakdown of passenger nationalities and ground casualties.
+    4. Aircraft Profile: Contrast the 787's safety record with this incident.
+    5. Investigation Focus: Flowchart of the investigation's key areas.
+    6. Market Impact: Chart showing financial repercussions for Boeing and suppliers.
+    7. Conclusion: A summary of the global reaction.
+
+    Visualization Plan:
+    - Big Numbers: Goal: Inform. Method: Styled HTML. Justification: High-impact, immediate understanding. (NO SVG)
+    - Timeline: Goal: Organize. Method: HTML/CSS with Tailwind. Justification: Clear, sequential narrative. (NO SVG)
+    - Donut Chart (Nationalities): Goal: Compare. Method: Chart.js (Canvas). Justification: Shows composition of a whole. (NO SVG)
+    - Bar Chart (Market Impact): Goal: Compare. Method: Chart.js (Canvas). Justification: Compares distinct entities effectively. (NO SVG)
+    - Bar Chart (Safety Record): Goal: Compare. Method: Chart.js (Canvas). Justification: Stark contrast between past and present. (NO SVG)
+    - Flow Chart (Investigation): Goal: Organize. Method: HTML/CSS with Tailwind. Justification: Visualizes a process simply. (NO SVG, NO MERMAID JS)
+
+    Color Palette Selection:
+    - Palette Name: "Brilliant Blues" (Modified for clarity).
+    - Hex Codes Used: #003f5c, #7a5195, #ef5675, #ffa600, and supporting grays/whites.
+
+    Confirmation: NEITHER Mermaid JS NOR SVG were used in this output. All visualizations are created with Chart.js (Canvas) or structured HTML/CSS with Tailwind.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .brand-text-primary { color: #003f5c; }
+        .brand-text-secondary { color: #7a5195; }
+        .brand-text-accent { color: #ef5675; }
+        .brand-bg-primary { background-color: #003f5c; }
+        .brand-bg-secondary { background-color: #7a5195; }
+        .brand-bg-accent { background-color: #ef5675; }
+        .brand-border-primary { border-color: #003f5c; }
+        .brand-border-accent { border-color: #ef5675; }
+        .stat-card h3 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+        .stat-card p {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-black brand-text-primary mb-2">Catastrophe in Ahmedabad</h1>
+            <p class="text-lg md:text-xl text-gray-600">A Visual Analysis of the Air India Flight AI171 Crash on June 12, 2025</p>
+        </header>
+
+        <section class="mb-16">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
+                <div class="stat-card bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="brand-text-primary">242</h3>
+                    <p>Total Souls Onboard</p>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="brand-text-accent">241</h3>
+                    <p>Fatalities Confirmed</p>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="brand-text-secondary">1</h3>
+                    <p>Miraculous Survivor</p>
+                </div>
+                <div class="stat-card bg-white p-6 rounded-xl shadow-lg">
+                    <h3 class="text-yellow-500">625<span class="text-2xl align-top">ft</span></h3>
+                    <p>Maximum Altitude Reached</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-16">
+            <h2 class="text-3xl font-bold brand-text-primary mb-2 text-center">The Flight of AI171: A Timeline of Tragedy</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                The incident unfolded with catastrophic speed, leaving the crew with virtually no time to react. The flight lasted mere moments from takeoff to impact, signaling a sudden and severe in-flight emergency.
+            </p>
+            <div class="relative w-full max-w-2xl mx-auto">
+                <div class="absolute left-1/2 h-full w-1 bg-gray-200 rounded-full" style="transform: translateX(-50%);"></div>
+                <div class="relative flex items-center justify-start mb-12">
+                    <div class="w-1/2 pr-8 text-right">
+                        <p class="text-lg font-bold brand-text-secondary">13:38 IST</p>
+                        <p class="text-gray-600">Takeoff from Runway 23</p>
+                    </div>
+                    <div class="absolute left-1/2 w-4 h-4 rounded-full brand-bg-secondary border-4 border-white" style="transform: translateX(-50%);"></div>
+                </div>
+                <div class="relative flex items-center justify-end mb-12">
+                    <div class="absolute left-1/2 w-4 h-4 rounded-full brand-bg-secondary border-4 border-white" style="transform: translateX(-50%);"></div>
+                    <div class="w-1/2 pl-8 text-left">
+                        <p class="text-lg font-bold brand-text-secondary">~30 Seconds Post-Takeoff</p>
+                        <p class="text-gray-600">"Mayday" distress call transmitted to ATC</p>
+                    </div>
+                </div>
+                <div class="relative flex items-center justify-start mb-12">
+                    <div class="w-1/2 pr-8 text-right">
+                        <p class="text-lg font-bold text-yellow-500">~45 Seconds Post-Takeoff</p>
+                        <p class="text-gray-600">Reached max altitude of 625 feet</p>
+                    </div>
+                    <div class="absolute left-1/2 w-4 h-4 rounded-full bg-yellow-400 border-4 border-white" style="transform: translateX(-50%);"></div>
+                </div>
+                <div class="relative flex items-center justify-end">
+                    <div class="absolute left-1/2 w-4 h-4 rounded-full brand-bg-accent border-4 border-white" style="transform: translateX(-50%);"></div>
+                    <div class="w-1/2 pl-8 text-left">
+                        <p class="text-lg font-bold brand-text-accent">&lt; 1 Minute Post-Takeoff</p>
+                        <p class="text-gray-600">Impact in Meghani Nagar, 2km from runway</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold brand-text-primary mb-2 text-center">The Human Toll: A Global Tragedy</h2>
+                <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                    The flight carried a diverse group of international passengers. The chart below shows the breakdown by nationality, highlighting the widespread impact of the loss.
+                </p>
+                <div class="chart-container">
+                    <canvas id="nationalitiesChart"></canvas>
+                </div>
+            </div>
+             <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 flex flex-col justify-center">
+                <h2 class="text-3xl font-bold brand-text-primary mb-2 text-center">Ground Impact</h2>
+                 <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                    The crash in a dense urban area caused significant casualties on the ground, impacting the B.J. Medical College hostel and devastating the local community.
+                </p>
+                 <div class="flex flex-col md:flex-row justify-around items-center text-center space-y-6 md:space-y-0">
+                     <div>
+                         <p class="text-6xl font-black brand-text-accent">5+</p>
+                         <p class="text-lg font-medium text-gray-600">Medical Students Killed</p>
+                     </div>
+                     <div>
+                         <p class="text-6xl font-black brand-text-accent">60</p>
+                         <p class="text-lg font-medium text-gray-600">Medical Students Hospitalized</p>
+                     </div>
+                 </div>
+            </div>
+        </div>
+        
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-16">
+            <h2 class="text-3xl font-bold brand-text-primary mb-2 text-center">The Aircraft in Question: A Paradox of Safety</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                The Boeing 787 Dreamliner had a flawless fatal-accident record before this incident, making the crash of AI171 a shocking anomaly that has shaken the aviation industry. This chart contrasts its extensive service history with this single, catastrophic event.
+            </p>
+            <div class="chart-container" style="height: 450px;">
+                <canvas id="safetyRecordChart"></canvas>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-16">
+            <h2 class="text-3xl font-bold brand-text-primary mb-2 text-center">Investigation Unfolds</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                Investigators are focused on a "rarest of rare" dual engine failure theory, while the crash intensifies scrutiny on Boeing amid pre-existing whistleblower claims about 787 manufacturing flaws. Weather has been ruled out.
+            </p>
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                <div class="text-center p-4 border-2 brand-border-primary rounded-lg w-full md:w-1/4">
+                    <p class="font-bold text-lg brand-text-primary">Primary Theory</p>
+                    <p class="text-sm">Dual Engine Power Loss</p>
+                </div>
+                <div class="text-2xl font-bold brand-text-primary transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="text-center p-4 border-2 brand-border-primary rounded-lg w-full md:w-1/4">
+                    <p class="font-bold text-lg brand-text-primary">Key Evidence</p>
+                    <p class="text-sm">Flight Data & Voice Recorders</p>
+                </div>
+                <div class="text-2xl font-bold brand-text-primary transform md:rotate-0 rotate-90">&rarr;</div>
+                <div class="text-center p-4 border-2 brand-border-accent rounded-lg w-full md:w-1/4">
+                    <p class="font-bold text-lg brand-text-accent">Aggravating Context</p>
+                    <p class="text-sm">Whistleblower Allegations</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-16">
+            <h2 class="text-3xl font-bold brand-text-primary mb-2 text-center">Market Aftershocks</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-8">
+                The crash sent immediate shockwaves through the financial markets, with Boeing's stock plummeting and its key suppliers also taking a significant hit, reflecting investor fears over the 787's future.
+            </p>
+            <div class="chart-container">
+                <canvas id="marketImpactChart"></canvas>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="text-center p-4 text-gray-500 text-sm">
+        <p>This infographic is based on a synthesised analysis of the Air India Flight AI171 incident. Data is compiled for illustrative and informational purposes.</p>
+        <p>All visualizations created using Chart.js (Canvas) and structured HTML/CSS. No SVG or Mermaid JS assets were used.</p>
+    </footer>
+
+    <script>
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = '';
+            words.forEach(word => {
+                if ((currentLine + ' ' + word).trim().length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            });
+            if (currentLine.length > 0) {
+                lines.push(currentLine);
+            }
+            return lines;
+        }
+
+        const tooltipTitleCallback = (tooltipItems) => {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+              return label.join(' ');
+            } else {
+              return label;
+            }
+        };
+        
+        const sharedChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#4a5568',
+                        font: {
+                            family: "'Inter', sans-serif"
+                        }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    },
+                    backgroundColor: '#003f5c',
+                    titleFont: {
+                         weight: 'bold'
+                    },
+                    bodyFont: {
+                        family: "'Inter', sans-serif"
+                    },
+                    titleFont: {
+                        family: "'Inter', sans-serif"
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { 
+                        color: '#4a5568',
+                        font: {
+                           family: "'Inter', sans-serif"
+                        }
+                    },
+                    grid: {
+                        color: '#e2e8f0'
+                    }
+                },
+                x: {
+                    ticks: { 
+                        color: '#4a5568',
+                        font: {
+                           family: "'Inter', sans-serif"
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        const nationalitiesData = {
+            labels: ['Indian', 'British', 'Portuguese', 'Canadian'],
+            datasets: [{
+                label: 'Passengers by Nationality',
+                data: [169, 53, 7, 1],
+                backgroundColor: [
+                    '#ffa600', 
+                    '#003f5c',
+                    '#ef5675',
+                    '#7a5195'
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        };
+        new Chart(document.getElementById('nationalitiesChart'), {
+            type: 'doughnut',
+            data: nationalitiesData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: '#4a5568', font: { family: "'Inter', sans-serif" } }
+                    },
+                    tooltip: {
+                         callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        backgroundColor: '#003f5c'
+                    }
+                }
+            }
+        });
+
+        const safetyRecordData = {
+            labels: [wrapLabel('Total 787 Passengers Carried Before Incident', 16), wrapLabel('Fatalities in AI171 Crash', 16)],
+            datasets: [{
+                label: 'Number of People',
+                data: [1000000000, 241],
+                backgroundColor: [
+                    '#003f5c',
+                    '#ef5675'
+                ],
+                borderColor: '#ffffff',
+                borderWidth: 2,
+                barPercentage: 0.5
+            }]
+        };
+        new Chart(document.getElementById('safetyRecordChart'), {
+            type: 'bar',
+            data: safetyRecordData,
+            options: {
+                ...sharedChartOptions,
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        type: 'logarithmic',
+                        ticks: { color: '#4a5568', font: { family: "'Inter', sans-serif" } },
+                        grid: { color: '#e2e8f0' }
+                    },
+                    y: {
+                       ticks: { color: '#4a5568', font: { family: "'Inter', sans-serif" } },
+                       grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                         callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        backgroundColor: '#003f5c'
+                    }
+                }
+            }
+        });
+
+        const marketImpactData = {
+            labels: ['Boeing', 'GE Aerospace', 'Spirit AeroSystems', 'Rolls-Royce'],
+            datasets: [{
+                label: 'Stock Price Drop (%)',
+                data: [-7.0, -4.7, -2.9, -2.5],
+                backgroundColor: ['#ef5675', '#ff764a', '#ffa600', '#7a5195'],
+                borderColor: '#ffffff',
+                borderWidth: 2
+            }]
+        };
+        new Chart(document.getElementById('marketImpactChart'), {
+            type: 'bar',
+            data: marketImpactData,
+            options: {
+                ...sharedChartOptions,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                         callbacks: {
+                            title: tooltipTitleCallback,
+                            label: function(context) {
+                                return `Drop: ${context.raw}%`;
+                            }
+                        },
+                        backgroundColor: '#003f5c'
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
